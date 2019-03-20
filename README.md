@@ -98,6 +98,9 @@ Currently, kafka-shell has helper commands:
 
 In-line help for each command and option is shown by default. This can be toggled by `F9`.
 
+## Contributing
+Contributions are very welcome. See [CONTRIBUTING.md][contributing] for details.
+
 ## Acknowledgement
 This project was inspired by multiple amazing shells & prompts, such as [saws][saws], [kube-shell][kube-shell], [kube-prompt][kube-prompt], [http-prompt][http-prompt], and [wharfee][wharfee]. It was built using [prompt-toolkit][prompt-toolkit]. Much ❤️ to [Apache Kafka][kafka] and [Confluent][confluent] for their helpful CLI tools. 
 
@@ -115,4 +118,5 @@ Licensed under the [Apache 2.0 license][license].
 [kafka]: https://kafka.apache.org
 [confluent]: https://www.confluent.io/
 [configuration]: CONFIGURATION.md
+[contributing]: CONTRIBUTING.md
 [license]: LICENSE
