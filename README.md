@@ -1,6 +1,6 @@
 # kafka-shell
 
-[![Build Status](https://travis-ci.org/devshawn/kafka-shell.svg?branch=master)](https://travis-ci.org/devshawn/kafka-shell) [![codecov](https://codecov.io/gh/devshawn/kafka-shell/branch/master/graph/badge.svg)](https://codecov.io/gh/devshawn/kafka-shell) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Build Status](https://travis-ci.org/devshawn/kafka-shell.svg?branch=master)](https://travis-ci.org/devshawn/kafka-shell) [![codecov](https://codecov.io/gh/devshawn/kafka-shell/branch/master/graph/badge.svg)](https://codecov.io/gh/devshawn/kafka-shell) ![PyPI](https://img.shields.io/pypi/v/kafka-shell.svg?color=blue) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/kafka-shell.svg) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 A supercharged, interactive Kafka shell built on top of the existing Kafka CLI tools.
 
