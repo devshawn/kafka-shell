@@ -1,0 +1,58 @@
+{
+    "type": "object",
+    "title": "kafka-shell JSON schema for boolean values",
+    "required": [
+        "values"
+    ],
+    "properties": {
+        "values": {
+            "type": "object",
+            "title": "Booleans",
+            "description": "The list of boolean values.",
+            "required": [
+                "true",
+                "false"
+            ],
+            "patternProperties": {
+                "^(true|false)$": {
+                    "type": "object",
+                    "title": "Boolean",
+                    "description": "A boolean.",
+                    "required": [
+                        "name",
+                        "description"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Name",
+                            "description": "The name of the boolean.",
+                            "default": "",
+                            "examples": [
+                                "true",
+                                "false"
+                            ],
+                            "enum": [
+                                "true",
+                                "false"
+                            ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "Description",
+                            "description": "The description of the boolean. This is shown when inline help is enabled.",
+                            "default": "",
+                            "examples": [
+                                "Sets the value to truthy."
+                            ],
+                            "pattern": "^[^\\s].+[.][^\\s]*$"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

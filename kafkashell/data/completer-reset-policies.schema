@@ -1,0 +1,56 @@
+{
+    "type": "object",
+    "title": "kafka-shell JSON schema for kafka reset policy values",
+    "required": [
+        "values"
+    ],
+    "properties": {
+        "values": {
+            "type": "object",
+            "title": "Values",
+            "description": "The list of kafka configuration keys.",
+            "patternProperties": {
+                "^(earliest|latest|none)$": {
+                    "type": "object",
+                    "title": "Reset Policies",
+                    "description": "A reset policy.",
+                    "required": [
+                        "name",
+                        "description"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Name",
+                            "description": "The name of the reset policy.",
+                            "default": "earliest",
+                            "examples": [
+                                "earliest",
+                                "latest",
+                                "none"
+                            ],
+                            "enum": [
+                                "earliest",
+                                "latest",
+                                "none"
+                            ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "Description",
+                            "description": "The description of the reset policy. This is shown when inline help is enabled.",
+                            "default": "",
+                            "examples": [
+                                "Reset from the earliest offset."
+                            ],
+                            "pattern": "^[^\\s].+[.][^\\s]*$"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

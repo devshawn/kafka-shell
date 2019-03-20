@@ -1,0 +1,16 @@
+{
+    "values": {
+        "earliest": {
+            "name": "earliest",
+            "description": "Reset from the earliest offset."
+        },
+        "latest": {
+            "name": "latest",
+            "description": "Reset from the latest offset."
+        },
+        "none": {
+            "name": "none",
+            "description": "No reset policy."
+        }
+    }
+}

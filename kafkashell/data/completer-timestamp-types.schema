@@ -1,0 +1,54 @@
+{
+    "type": "object",
+    "title": "kafka-shell JSON schema for log message timestamp type values",
+    "required": [
+        "values"
+    ],
+    "properties": {
+        "values": {
+            "type": "object",
+            "title": "Values",
+            "description": "The list of timestamp types.",
+            "patternProperties": {
+                "^(CreateTime|LogAppendTime)$": {
+                    "type": "object",
+                    "title": "Timestamp Type",
+                    "description": "A log message timestamp type.",
+                    "required": [
+                        "name",
+                        "description"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Name",
+                            "description": "The name of the timestamp type.",
+                            "default": "CreateTime",
+                            "examples": [
+                                "CreateTime",
+                                "LogAppendTime"
+                            ],
+                            "enum": [
+                                "CreateTime",
+                                "LogAppendTime"
+                            ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "Description",
+                            "description": "The description of the timestamp type. This is shown when inline help is enabled.",
+                            "default": "",
+                            "examples": [
+                                "The timestamp in the message will be the message create time."
+                            ],
+                            "pattern": "^[^\\s].+[.][^\\s]*$"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

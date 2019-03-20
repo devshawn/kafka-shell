@@ -1,0 +1,939 @@
+{
+    "commands": {
+        "cluster-select": {
+            "name": "cluster-select",
+            "description": "Select a cluster to manage."
+        },
+        "cluster-describe": {
+            "name": "cluster-describe",
+            "description": "Describe the YAML config of a cluster."
+        },
+        "version": {
+            "name": "version",
+            "description": "Print the current kafka-shell version."
+        },
+        "clear": {
+            "name": "clear",
+            "description": "Clear the screen."
+        },
+        "exit": {
+            "name": "exit",
+            "description": "Exit the program."
+        },
+        "kafka-topics": {
+            "name": "kafka-topics",
+            "description": "Manage topics within a cluster.",
+            "options": {
+                "--alter": {
+                    "name": "--alter",
+                    "description": "Alter the number of partitions, replica assignment, and/or configuration for a topic."
+                },
+                "--config": {
+                    "name": "--config",
+                    "description": "A topic configuration override for the topic being created or altered.",
+                    "completer": "kafka-configs"
+                },
+                "--create": {
+                    "name": "--create",
+                    "description": "Create a new topic."
+                },
+                "--delete": {
+                    "name": "--delete",
+                    "description": "Delete a topic."
+                },
+                "--delete-config": {
+                    "name": "--delete-config",
+                    "description": "A topic configuration override to be removed for an existing topic.",
+                    "completer": "kafka-configs"
+                },
+                "--describe": {
+                    "name": "--describe",
+                    "description": "List details for the given topics."
+                },
+                "--disable-rack-aware": {
+                    "name": "--disable-rack-aware",
+                    "description": "Disable rack aware replica assignment."
+                },
+                "--exclude-internal": {
+                    "name": "--exclude-internal",
+                    "description": "Exclude internal topics when running list or describe command."
+                },
+                "--force": {
+                    "name": "--force",
+                    "description": "Assume yes for all queries and do not prompt."
+                },
+                "--help": {
+                    "name": "--help",
+                    "description": "Print usage information."
+                },
+                "--if-exists": {
+                    "name": "--if-exists",
+                    "description": "If set when altering or deleting topics, the action will only execute if the topic exists."
+                },
+                "--if-not-exists": {
+                    "name": "--if-not-exists",
+                    "description": "If set when creating topics, the action will only execute if the topic does not already exist."
+                },
+                "--list": {
+                    "name": "--list",
+                    "description": "List all available topics."
+                },
+                "--partitions": {
+                    "name": "--partitions",
+                    "description": "The number of partitions for the topic being created or altered."
+                },
+                "--replica-assignment": {
+                    "name": "--replica-assignment",
+                    "description": "A list of manual partition-to-broker assignments for the topic being created or altered."
+                },
+                "--replication-factor": {
+                    "name": "--replication-factor",
+                    "description": "The replication factor for each partition in the topic being created."
+                },
+                "--topic": {
+                    "name": "--topic",
+                    "description": "The topic to be create, alter, describe, or delete."
+                },
+                "--topics-with-overrides": {
+                    "name": "--topics-with-overrides",
+                    "description": "If set when describing topics, only show topics that have overridden configs."
+                },
+                "--unavailable-partitions": {
+                    "name": "--unavailable-partitions",
+                    "description": "If set when describing topics, only show partitions whose leader is not available."
+                },
+                "--under-replicated-partitions": {
+                    "name": "--under-replicated-partitions",
+                    "description": "If set when describing topics, only show under replicated partitions."
+                },
+                "--zookeeper": {
+                    "name": "--zookeeper",
+                    "description": "Zookeeper connection string. WARNING: This'll overwrite the selected cluster value."
+                }
+            }
+        },
+        "kafka-configs": {
+            "name": "kafka-configs",
+            "description": "Manage configs for a topic, broker, client, user.",
+            "options": {
+                "--add-config": {
+                    "name": "--add-config",
+                    "description": "Key-value pairs of configs to add. Format: key=value.",
+                    "completer": "kafka-configs"
+                },
+                "--alter": {
+                    "name": "--alter",
+                    "description": "Alter the configuration for the entity."
+                },
+                "--bootstrap-server": {
+                    "name": "--bootstrap-server",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--command-config": {
+                    "name": "--command-config",
+                    "description": "Property file containing configs to be passed to the admin client."
+                },
+                "--delete-config": {
+                    "name": "--delete-config",
+                    "description": "Key-value pairs of configs to remove. Format: key=value.",
+                    "completer": "kafka-configs"
+                },
+                "--describe": {
+                    "name": "--describe",
+                    "description": "List configs for the given entity."
+                },
+                "--entity-default": {
+                    "name": "--entity-default",
+                    "description": "Default entity name for clients, users, and brokers."
+                },
+                "--entity-name": {
+                    "name": "--entity-name",
+                    "description": "Name of the entity (topic name, client id, user principal name, broker id)."
+                },
+                "--entity-type": {
+                    "name": "--entity-type",
+                    "description": "Type of the entity (topic, client, user, broker).",
+                    "completer": "entity-types"
+                },
+                "--force": {
+                    "name": "--force",
+                    "description": "Assume yes for all queries and do not prompt."
+                },
+                "--help": {
+                    "name": "--help",
+                    "description": "Print usage information."
+                },
+                "--zookeeper": {
+                    "name": "--zookeeper",
+                    "description": "Zookeeper connection string. NOTE: This'll overwrite the selected cluster value."
+                }
+            }
+        },
+        "kafka-console-consumer": {
+            "name": "kafka-console-consumer",
+            "description": "Consume messages from a topic.",
+            "options": {
+                "--bootstrap-server": {
+                    "name": "--bootstrap-server",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--consumer-property": {
+                    "name": "--consumer-property",
+                    "description": "A way to pass user-defined properties in the form key=value to the consumer."
+                },
+                "--consumer.config": {
+                    "name": "--consumer.config",
+                    "description": "Consumer config properties file. Note that --consumer-property takes precedence over this config."
+                },
+                "--enable-systest-events": {
+                    "name": "--enable-systest-events",
+                    "description": "Log lifecycle events of the consumer in addition to logging consumed messages."
+                },
+                "--formatter": {
+                    "name": "--formatter",
+                    "description": "The name of a class to use for formatting kafka messages for display."
+                },
+                "--from-beginning": {
+                    "name": "--from-beginning",
+                    "description": "Start with the earliest message present in the log rather than the latest message."
+                },
+                "--group": {
+                    "name": "--group",
+                    "description": "The consumer group id of the consumer."
+                },
+                "--isolation-level": {
+                    "name": "--isolation-level",
+                    "description": "Set to read_committed in order to filter out transactional messages which are not committed."
+                },
+                "--key-deserializer": {
+                    "name": "--key-deserializer",
+                    "description": "Deserializer for the key."
+                },
+                "--max-messages": {
+                    "name": "--max-messages",
+                    "description": "The maximum number of messages to consume before exiting. Defaults to continual consumption."
+                },
+                "--offset": {
+                    "name": "--offset",
+                    "description": "The offset id to consume from. A non-negative integer, 'earliest', or 'latest'."
+                },
+                "--partition": {
+                    "name": "--partition",
+                    "description": "The partition to consume from. Starts from the end unless --offset is set."
+                },
+                "--property": {
+                    "name": "--property",
+                    "description": "The properties to initialize the message formatter."
+                },
+                "--skip-message-on-error": {
+                    "name": "--skip-message-on-error",
+                    "description": "If there is an error when processing a message, skip it rather than halting."
+                },
+                "--timeout-ms": {
+                    "name": "--timeout-ms",
+                    "description": "If specified, exit if no message is available for consumption for the specified interval."
+                },
+                "--topic": {
+                    "name": "--topic",
+                    "description": "The topic to consume from."
+                },
+                "--value-deserializer": {
+                    "name": "--value-deserializer",
+                    "description": "Deserializer for the value."
+                },
+                "--whitelist": {
+                    "name": "--whitelist",
+                    "description": "Whitelist of topics to include for consumption."
+                }
+            }
+        },
+        "kafka-console-producer": {
+            "name": "kafka-console-producer",
+            "description": "Produce messages to a topic.",
+            "options": {
+                "--batch-size": {
+                    "name": "--batch-size",
+                    "description": "Number of messages to send in a single batch if they are not being sent synchronously."
+                },
+                "--broker-list": {
+                    "name": "--broker-list",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--compression-codec": {
+                    "name": "--compression-codec",
+                    "description": "The compression codec. Default: gzip.",
+                    "completer": "compression-codecs"
+                },
+                "--line-reader": {
+                    "name": "--line-reader",
+                    "description": "The class name of the class to use for reading lines from standard in."
+                },
+                "--max-block-ms": {
+                    "name": "--max-block-ms",
+                    "description": "The max time that the producer will block for during a send request."
+                },
+                "--max-memory-bytes": {
+                    "name": "--max-memory-bytes",
+                    "description": "The total memory used by the producer to buffer records waiting to be sent to the server."
+                },
+                "--max-partition-memory-bytes": {
+                    "name": "--max-partition-memory-bytes",
+                    "description": "The buffer size allocated for a partition."
+                },
+                "--message-send-max-retries": {
+                    "name": "--message-send-max-retries",
+                    "description": "The number of retires before the producer will give up and drop a message."
+                },
+                "--metadata-expiry-ms": {
+                    "name": "--metadata-expiry-ms",
+                    "description": "Number of milliseconds after which we force a refresh of metadata even if we haven't seen any leadership changes."
+                },
+                "--producer-property": {
+                    "name": "--producer-property",
+                    "description": "A mechanism to pass user-defined properties in the form key=value to the producer."
+                },
+                "--producer.config": {
+                    "name": "--producer.config",
+                    "description": "Producer config properties file. Note that --producer-property takes precedence over this config."
+                },
+                "--property": {
+                    "name": "--property",
+                    "description": "A mechanism to pass user-defined properties in the form key=value to the message reader."
+                },
+                "--request-required-acks": {
+                    "name": "--request-required-acks",
+                    "description": "The required acks of the producer request.",
+                    "completer": "acks"
+                },
+                "--request-timeout-ms": {
+                    "name": "--request-timeout-ms",
+                    "description": "The ack timeout of the producer requests. Value must be non-negative."
+                },
+                "--retry-backoff-ms": {
+                    "name": "--retry-backoff-ms",
+                    "description": "The amount of time the producer waits before refreshing the metadata of the topic."
+                },
+                "--socket-buffer-size": {
+                    "name": "--socket-buffer-size",
+                    "description": "The size of the tcp RECV size."
+                },
+                "--sync": {
+                    "name": "--sync",
+                    "description": "If set message send requests to the brokers are synchronously, one at a time as they arrive."
+                },
+                "--timeout": {
+                    "name": "--timeout",
+                    "description": "In asynchronous mode, the maximum amount of time a message will queue awaiting sufficient batch size."
+                },
+                "--topic": {
+                    "name": "--topic",
+                    "description": "The topic to produce messages to."
+                }
+            }
+        },
+        "kafka-avro-console-consumer": {
+            "name": "kafka-avro-console-consumer",
+            "description": "Consume AVRO messages from a topic.",
+            "options": {
+                "--bootstrap-server": {
+                    "name": "--bootstrap-server",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--consumer-property": {
+                    "name": "--consumer-property",
+                    "description": "A mechanism to pass user-defined properties in the form key=value to the consumer."
+                },
+                "--consumer.config": {
+                    "name": "--consumer.config",
+                    "description": "Consumer config properties file. Note that --consumer-property takes precedence over this config."
+                },
+                "--enable-systest-events": {
+                    "name": "--enable-systest-events",
+                    "description": "Log lifecycle events of the consumer in addition to logging consumed messages."
+                },
+                "--formatter": {
+                    "name": "--formatter",
+                    "description": "The name of a class to use for formatting kafka messages for display."
+                },
+                "--from-beginning": {
+                    "name": "--from-beginning",
+                    "description": "Start with the earliest message present in the log rather than the latest message."
+                },
+                "--group": {
+                    "name": "--group",
+                    "description": "The consumer group id of the consumer."
+                },
+                "--isolation-level": {
+                    "name": "--isolation-level",
+                    "description": "Set to read_committed in order to filter out transactional messages which are not committed."
+                },
+                "--key-deserializer": {
+                    "name": "--key-deserializer",
+                    "description": "Deserializer for the key."
+                },
+                "--max-messages": {
+                    "name": "--max-messages",
+                    "description": "The maximum number of messages to consume before exiting. Defaults to continual consumption."
+                },
+                "--offset": {
+                    "name": "--offset",
+                    "description": "The offset id to consume from. A non-negative integer, 'earliest', or 'latest'."
+                },
+                "--partition": {
+                    "name": "--partition",
+                    "description": "The partition to consume from. Starts from the end unless --offset is set."
+                },
+                "--property": {
+                    "name": "--property",
+                    "description": "The properties to initialize the message formatter."
+                },
+                "--skip-message-on-error": {
+                    "name": "--skip-message-on-error",
+                    "description": "If there is an error when processing a message, skip it rather than halting."
+                },
+                "--timeout-ms": {
+                    "name": "--timeout-ms",
+                    "description": "If specified, exit if no message is available for consumption for the specified interval."
+                },
+                "--topic": {
+                    "name": "--topic",
+                    "description": "The topic to consume from."
+                },
+                "--value-deserializer": {
+                    "name": "--value-deserializer",
+                    "description": "Deserializer for the value."
+                },
+                "--whitelist": {
+                    "name": "--whitelist",
+                    "description": "Whitelist of topics to include for consumption."
+                }
+            }
+        },
+        "kafka-avro-console-producer": {
+            "name": "kafka-avro-console-producer",
+            "description": "Produce AVRO messages to a topic.",
+            "options": {
+                "--batch-size": {
+                    "name": "--batch-size",
+                    "description": "Number of messages to send in a single batch if they are not being sent synchronously."
+                },
+                "--broker-list": {
+                    "name": "--broker-list",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--compression-codec": {
+                    "name": "--compression-codec",
+                    "description": "The compression codec. Default: gzip.",
+                    "completer": "compression-codecs"
+                },
+                "--line-reader": {
+                    "name": "--line-reader",
+                    "description": "The class name of the class to use for reading lines from standard in."
+                },
+                "--max-block-ms": {
+                    "name": "--max-block-ms",
+                    "description": "The max time that the producer will block for during a send request."
+                },
+                "--max-memory-bytes": {
+                    "name": "--max-memory-bytes",
+                    "description": "The total memory used by the producer to buffer records waiting to be sent to the server."
+                },
+                "--max-partition-memory-bytes": {
+                    "name": "--max-partition-memory-bytes",
+                    "description": "The buffer size allocated for a partition."
+                },
+                "--message-send-max-retries": {
+                    "name": "--message-send-max-retries",
+                    "description": "The number of retires before the producer will give up and drop a message."
+                },
+                "--metadata-expiry-ms": {
+                    "name": "--metadata-expiry-ms",
+                    "description": "Number of milliseconds after which we force a refresh of metadata even if we haven't seen any leadership changes."
+                },
+                "--producer-property": {
+                    "name": "--producer-property",
+                    "description": "A mechanism to pass user-defined properties in the form key=value to the producer."
+                },
+                "--producer.config": {
+                    "name": "--producer.config",
+                    "description": "Producer config properties file. Note that --producer-property takes precedence over this config."
+                },
+                "--property": {
+                    "name": "--property",
+                    "description": "A mechanism to pass user-defined properties in the form key=value to the message reader."
+                },
+                "--request-required-acks": {
+                    "name": "--request-required-acks",
+                    "description": "The required acks of the producer request.",
+                    "completer": "acks"
+                },
+                "--request-timeout-ms": {
+                    "name": "--request-timeout-ms",
+                    "description": "The ack timeout of the producer requests. Value must be non-negative."
+                },
+                "--retry-backoff-ms": {
+                    "name": "--retry-backoff-ms",
+                    "description": "The amount of time the producer waits before refreshing the metadata of the topic."
+                },
+                "--socket-buffer-size": {
+                    "name": "--socket-buffer-size",
+                    "description": "The size of the tcp RECV size."
+                },
+                "--sync": {
+                    "name": "--sync",
+                    "description": "If set message send requests to the brokers are synchronously, one at a time as they arrive."
+                },
+                "--timeout": {
+                    "name": "--timeout",
+                    "description": "In asynchronous mode, the maximum amount of time a message will queue awaiting sufficient batch size."
+                },
+                "--topic": {
+                    "name": "--topic",
+                    "description": "The topic to produce messages to."
+                }
+            }
+        },
+        "kafka-verifiable-consumer": {
+            "name": "kafka-verifiable-consumer",
+            "description": "Consume messages from a specific topic and emit consumer events.",
+            "options": {
+                "--broker-list": {
+                    "name": "--broker-list",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--topic": {
+                    "name": "--topic",
+                    "description": "The topic to consume from."
+                },
+                "--group-id": {
+                    "name": "--group-id",
+                    "description": "The group id shared among members of the consumer group."
+                },
+                "--max-messages": {
+                    "name": "--max-messages",
+                    "description": "The maximum number of messages to consume before exiting. Defaults to continual consumption."
+                },
+                "--session-timeout": {
+                    "name": "--session-timeout",
+                    "description": "The consumer's session timeout. Default: 30000."
+                },
+                "--verbose": {
+                    "name": "--verbose",
+                    "description": "Log individual consumed records."
+                },
+                "--enable-autocommit": {
+                    "name": "--enable-autocommit",
+                    "description": "Enable offset auto-commit on consumer."
+                },
+                "--reset-policy": {
+                    "name": "--reset-policy",
+                    "description": "Set the reset policy. Must be 'earliest', 'latest', or 'none'. Default: earliest.",
+                    "completer": "reset-policies"
+                },
+                "--assignment-strategy": {
+                    "name": "--assignment-strategy",
+                    "description": "Set assignment strategy class. Default: org.apache.kafka.clients.consumer.RangeAssignor."
+                },
+                "--consumer.config": {
+                    "name": "--consumer.config",
+                    "description": "Consumer config properties file."
+                }
+            }
+        },
+        "kafka-verifiable-producer": {
+            "name": "kafka-verifiable-producer",
+            "description": "Produce increasing integers messages to the specified topic and emit producer events.",
+            "options": {
+                "--broker-list": {
+                    "name": "--broker-list",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--topic": {
+                    "name": "--topic",
+                    "description": "The topic to producer to."
+                },
+                "--max-messages": {
+                    "name": "--max-messages",
+                    "description": "The maximum number of messages to producer before exiting. Defaults to continual production."
+                },
+                "--throughput": {
+                    "name": "--throughput",
+                    "description": "Throttle maximum message throughput to *approximately* this messages/sec."
+                },
+                "--acks": {
+                    "name": "--acks",
+                    "description": "Acks required on each produced message. Default: -1.",
+                    "completer": "acks"
+                },
+                "--producer.config": {
+                    "name": "--producer.config",
+                    "description": "Producer config properties file."
+                },
+                "--message-create-time": {
+                    "name": "--message-create-time",
+                    "description": "Send messages with creation time starting at this value, in milliseconds since epoch."
+                },
+                "--value-prefix": {
+                    "name": "--value-prefix",
+                    "description": "Each produced value will have this prefix with a dot separator."
+                },
+                "--repeating-keys": {
+                    "name": "--repeating-keys",
+                    "description": "Each produced record key will increment from 0 until this number, and then start at 0 again."
+                }
+            }
+        },
+        "kafka-consumer-groups": {
+            "name": "kafka-consumer-groups",
+            "description": "Manage consumer groups within a cluster.",
+            "options": {
+                "--all-topics": {
+                    "name": "--all-topics",
+                    "description": "Consider all topics assigned to a group in the 'reset-offsets' process."
+                },
+                "--bootstrap-server": {
+                    "name": "--bootstrap-server",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--by-duration": {
+                    "name": "--by-duration",
+                    "description": "Reset offsets to offset by duration from current timestamp. Format: 'PnDTnHnMnS'."
+                },
+                "--command-config": {
+                    "name": "--command-config",
+                    "description": "Property file containing configs to be passed to admin client and consumer."
+                },
+                "--delete": {
+                    "name": "--delete",
+                    "description": "Delete topic partition offsets and ownership info over the entire consumer group."
+                },
+                "--describe": {
+                    "name": "--describe",
+                    "description": "Describe consumer group and list offset lag for the consumer group."
+                },
+                "--dry-run": {
+                    "name": "--dry-run",
+                    "description": "Show results without executing changes. Supported for '--reset-offsets'."
+                },
+                "--execute": {
+                    "name": "--execute",
+                    "description": "Execute operation. Supported for '--reset-offsets'."
+                },
+                "--export": {
+                    "name": "--export",
+                    "description": "Export operation execution to a CSV file. Supported for '--reset-offsets'."
+                },
+                "--from-file": {
+                    "name": "--from-file",
+                    "description": "Reset offsets to values defined in CSV file."
+                },
+                "--group": {
+                    "name": "--group",
+                    "description": "The consumer group to act on."
+                },
+                "--list": {
+                    "name": "--list",
+                    "description": "List all consumer groups."
+                },
+                "--members": {
+                    "name": "--members",
+                    "description": "Describe members of the given consumer group."
+                },
+                "--offsets": {
+                    "name": "--offsets",
+                    "description": "Describe group and list all topic partitions in the group along with their offset lag."
+                },
+                "--reset-offsets": {
+                    "name": "--reset-offsets",
+                    "description": "Reset offsets of consumer group. Supports one group at a time."
+                },
+                "--shift-by": {
+                    "name": "--shift-by",
+                    "description": "Reset offsets shifting current offset by 'n' where 'n' is positive or negative."
+                },
+                "--state": {
+                    "name": "--state",
+                    "description": "Describe the group state."
+                },
+                "--timeout": {
+                    "name": "--timeout",
+                    "description": "The timeout that can be set for some use cases."
+                },
+                "--to-current": {
+                    "name": "--to-current",
+                    "description": "Reset offsets to current offset."
+                },
+                "--to-datetime": {
+                    "name": "--to-datetime",
+                    "description": "Reset offsets to offset from datetime. Format: 'YYYY-MM-DDTHH:mm:SS.sss'."
+                },
+                "--to-earliest": {
+                    "name": "--to-earliest",
+                    "description": "Reset offsets to earliest offset."
+                },
+                "--to-latest": {
+                    "name": "--to-latest",
+                    "description": "Reset offsets to latest offset."
+                },
+                "--to-offset": {
+                    "name": "--to-offset",
+                    "description": "Reset offsets to a specific offset."
+                },
+                "--topic": {
+                    "name": "--topic",
+                    "description": "The topic whose consumer group information should be acted upon."
+                },
+                "--verbose": {
+                    "name": "--verbose",
+                    "description": "Provide additional information, if any, when describing the group."
+                }
+            }
+        },
+        "kafka-acls": {
+            "name": "kafka-acls",
+            "description": "Manage access control lists within a cluster.",
+            "options": {
+                "--add": {
+                    "name": "--add",
+                    "description": "Indicates you want to add ACLs."
+                },
+                "--allow-host": {
+                    "name": "--allow-host",
+                    "description": "Host from which principals listed in --allow-principal will have access."
+                },
+                "--allow-principal": {
+                    "name": "--allow-principal",
+                    "description": "Principal to allow in the principalType:name format."
+                },
+                "--authorizer": {
+                    "name": "--authorizer",
+                    "description": "Fully qualified class name of the authorizer."
+                },
+                "--authorizer-properties": {
+                    "name": "--authorizer-properties",
+                    "description": "Properties required to configure an instance of the authorizer. Format: key=value."
+                },
+                "--bootstrap-server": {
+                    "name": "--bootstrap-server",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--cluster": {
+                    "name": "--cluster",
+                    "description": "Add or remove cluster ACLs."
+                },
+                "--command-config": {
+                    "name": "--command-config",
+                    "description": "A property file containing configs to be passed to the admin client."
+                },
+                "--consumer": {
+                    "name": "--consumer",
+                    "description": "Convenience option to add or remove ACLs for the consumer role."
+                },
+                "--delegation-token": {
+                    "name": "--delegation-token",
+                    "description": "Delegation token to which ACLs should be added or removed."
+                },
+                "--deny-host": {
+                    "name": "--deny-host",
+                    "description": "Host from which principals listed in --deny-principal will be denied access."
+                },
+                "--deny-principal": {
+                    "name": "--deny-principal",
+                    "description": "Principal to deny in the principalType:name format."
+                },
+                "--force": {
+                    "name": "--force",
+                    "description": "Assume yes for all queries and do not prompt."
+                },
+                "--group": {
+                    "name": "--group",
+                    "description": "Consumer Group to which the ACLs should be added or removed."
+                },
+                "--help": {
+                    "name": "--help",
+                    "description": "Print usage information."
+                },
+                "--idempotent": {
+                    "name": "--idempotent",
+                    "description": "Enable idempotence for the producer. Used with '--producer'."
+                },
+                "--list": {
+                    "name": "--list",
+                    "description": "List ACLs for the specified resource."
+                },
+                "--operation": {
+                    "name": "--operation",
+                    "description": "Operation that is being allowed or denied."
+                },
+                "--principal": {
+                    "name": "--principal",
+                    "description": "List ACLs for the specified principal."
+                },
+                "--producer": {
+                    "name": "--producer",
+                    "description": "Convenience option to add or remove ACLs for producer role."
+                },
+                "--remove": {
+                    "name": "--remove",
+                    "description": "Indicates you are trying to remove ACLs."
+                },
+                "--resource-pattern-type": {
+                    "name": "--resource-pattern-type",
+                    "description": "The type of the resource pattern or pattern filter. Default: LITERAL.",
+                    "completer": "resource-pattern-types"
+                },
+                "--topic": {
+                    "name": "--topic",
+                    "description": "Topic for which ACLs should be added or removed."
+                },
+                "--transactional-id": {
+                    "name": "--transactional-id",
+                    "description": "The transactionalId to which ACLs should be added or removed."
+                }
+            }
+        },
+        "kafka-broker-api-versions": {
+            "name": "kafka-broker-api-versions",
+            "description": "Retrieve broker version information.",
+            "options": {
+                "--bootstrap-server": {
+                    "name": "--bootstrap-server",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--command-config": {
+                    "name": "--command-config",
+                    "description": "Property file containing configs to be passed to the admin client."
+                }
+            }
+        },
+        "kafka-delete-records": {
+            "name": "kafka-delete-records",
+            "description": "Delete records of the given partitions down to the specified offset.",
+            "options": {
+                "--bootstrap-server": {
+                    "name": "--bootstrap-server",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--command-config": {
+                    "name": "--command-config",
+                    "description": "Property file containing configs to be passed to the admin client."
+                },
+                "--offset-json-file": {
+                    "name": "--offset-json-file",
+                    "description": "The JSON file with offset per partition."
+                }
+            }
+        },
+        "kafka-log-dirs": {
+            "name": "kafka-log-dirs",
+            "description": "Query log directory usage on specified brokers.",
+            "options": {
+                "--bootstrap-server": {
+                    "name": "--bootstrap-server",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--broker-list": {
+                    "name": "--broker-list",
+                    "description": "The list of brokers to be queried in the form '0,1,2'. Default: all."
+                },
+                "--command-config": {
+                    "name": "--command-config",
+                    "description": "Property file containing configs to be passed to the admin client."
+                },
+                "--describe": {
+                    "name": "--describe",
+                    "description": "Describe the specified log directories on the specified brokers."
+                },
+                "--topic-list": {
+                    "name": "--topic-list",
+                    "description": "The list of topics to be queried in the form 'topic1,topic2,topic3'. Default: all."
+                }
+            }
+        },
+        "kafka-dump-log": {
+            "name": "kafka-dump-log",
+            "description": "Parse a log file and dump its contents to the console.",
+            "options": {
+                "--deep-iteration": {
+                    "name": "--deep-iteration",
+                    "description": "Use deep instead of shallow iteration. Automatically set when using '--print-data-log'."
+                },
+                "--files": {
+                    "name": "--files",
+                    "description": "Comma-separated list of data and index log files to be dumped."
+                },
+                "--help": {
+                    "name": "--help",
+                    "description": "Print usage information."
+                },
+                "--index-sanity-check": {
+                    "name": "--index-sanity-check",
+                    "description": "Check the index sanity without printing its content."
+                },
+                "--key-decoder-class": {
+                    "name": "--key-decoder-class",
+                    "description": "Used to deserialize the keys. Default: kafka.serializer.StringDecoder."
+                },
+                "--max-message-size": {
+                    "name": "--max-message-size",
+                    "description": "Size of largest message. Default: 5242880."
+                },
+                "--offsets-decoder": {
+                    "name": "--offsets-decoder",
+                    "description": "Parse log data as offset data from the __consumer_offsets topic."
+                },
+                "--print-data-log": {
+                    "name": "--print-data-log",
+                    "description": "Print the messages content when dumping data log. Automatically set when using any decoder option."
+                },
+                "--transaction-log-decoder": {
+                    "name": "--transaction-log-decoder",
+                    "description": "Parse log data as transaction metadata from the __transaction_state topic."
+                },
+                "--value-decoder-class": {
+                    "name": "--value-decoder-class",
+                    "description": "Used to deserialize the messages. Default: kafka.serializer.StringDecoder."
+                },
+                "--verify-index-only": {
+                    "name": "--verify-index-only",
+                    "description": "Verify the index log without printing its content."
+                }
+            }
+        },
+        "ksql": {
+            "name": "ksql",
+            "description": "Connect to a KSQL server.",
+            "options": {
+                "--config-file": {
+                    "name": "--config-file",
+                    "description": "File specifying configs for KSQL and its underlying Kafka Streams instance(s)."
+                },
+                "--help": {
+                    "name": "--help",
+                    "description": "Print usage information."
+                },
+                "--output": {
+                    "name": "--output",
+                    "description": "The output format to use (JSON or TABULAR). TABULAR by default.",
+                    "completer": "ksql-output"
+                },
+                "--query-row-limit": {
+                    "name": "--query-row-limit",
+                    "description": "An optional maximum number of rows to read from streamed queries."
+                },
+                "--query-timeout": {
+                    "name": "--query-timeout",
+                    "description": "An optional time limit (in milliseconds) for streamed queries."
+                },
+                "--": {
+                    "name": "--",
+                    "description": "Used to override the KSQL server. i.e. '-- http://localhost:8088'."
+                }
+            }
+        },
+        "zookeeper-shell": {
+            "name": "zookeeper-shell",
+            "description": "Access zookeeper shell."
+        }
+    }
+}

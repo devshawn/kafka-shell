@@ -1,0 +1,56 @@
+{
+    "type": "object",
+    "title": "kafka-shell JSON schema for kafka config entity type values",
+    "required": [
+        "values"
+    ],
+    "properties": {
+        "values": {
+            "type": "object",
+            "title": "Values",
+            "description": "The list of entity type values.",
+            "patternProperties": {
+                "^(topic|broker|client|user)$": {
+                    "type": "object",
+                    "title": "Entity Type",
+                    "description": "An entity type value",
+                    "required": [
+                        "name",
+                        "description"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Name",
+                            "description": "The name of the entity type.",
+                            "default": "",
+                            "examples": [
+                                "topic",
+                                "broker"
+                            ],
+                            "enum": [
+                                "topic",
+                                "broker",
+                                "user",
+                                "client"
+                            ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "Description",
+                            "description": "The description of the entity type. This is shown when inline help is enabled.",
+                            "default": "",
+                            "examples": [
+                                "Add, modify, or remove configurations for a topic."
+                            ],
+                            "pattern": "^[^\\s].+[.][^\\s]*$"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

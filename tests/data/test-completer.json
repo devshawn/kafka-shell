@@ -1,0 +1,22 @@
+{
+    "commands": {
+        "clear": {
+            "name": "clear",
+            "description": "Clear the screen"
+        },
+        "kafka-topics": {
+            "name": "kafka-topics",
+            "description": "Manage topics within a cluster.",
+            "options": {
+                "--alter": {
+                    "name": "alter",
+                    "description": "Alter the number of partitions, replica assignment, and/or configuration for a topic."
+                },
+                "--config": {
+                    "name": "--config",
+                    "description": "A topic configuration override for the topic being created or altered."
+                }
+            }
+        }
+    }
+}

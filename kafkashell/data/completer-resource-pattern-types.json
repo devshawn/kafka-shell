@@ -1,0 +1,20 @@
+{
+    "values": {
+        "ANY": {
+            "name": "ANY",
+            "description": "Match any pattern type."
+        },
+        "MATCH": {
+            "name": "MATCH",
+            "description": "Perform pattern matching for the pattern type."
+        },
+        "LITERAL": {
+            "name": "LITERAL",
+            "description": "Give a specific pattern type."
+        },
+        "PREFIXED": {
+            "name": "PREFIXED",
+            "description": "Prefixed pattern type."
+        }
+    }
+}

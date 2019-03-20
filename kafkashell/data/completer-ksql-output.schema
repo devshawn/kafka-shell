@@ -1,0 +1,54 @@
+{
+    "type": "object",
+    "title": "kafka-shell JSON schema for KSQL output values",
+    "required": [
+        "values"
+    ],
+    "properties": {
+        "values": {
+            "type": "object",
+            "title": "Values",
+            "description": "The list of KSQL output values.",
+            "patternProperties": {
+                "^(TABULAR|JSON)$": {
+                    "type": "object",
+                    "title": "Output Value",
+                    "description": "An output value",
+                    "required": [
+                        "name",
+                        "description"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Name",
+                            "description": "The name of the output value.",
+                            "default": "TABULAR",
+                            "examples": [
+                                "TABULAR",
+                                "JSON"
+                            ],
+                            "enum": [
+                                "TABULAR",
+                                "JSON"
+                            ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "Description",
+                            "description": "The description of the KSQL output value. This is shown when inline help is enabled.",
+                            "default": "",
+                            "examples": [
+                                "Output in JSON format."
+                            ],
+                            "pattern": "^[^\\s].+[.][^\\s]*$"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

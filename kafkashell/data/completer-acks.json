@@ -1,0 +1,20 @@
+{
+    "values": {
+        "all": {
+            "name": "all",
+            "description": "The leader will wait for the full set of in-sync replicas to acknowledge the record."
+        },
+        "-1": {
+            "name": "-1",
+            "description": "The leader will wait for the full set of in-sync replicas to acknowledge the record."
+        },
+        "0": {
+            "name": "0",
+            "description": "The producer will not wait for any acknowledgment from the server at all."
+        },
+        "1": {
+            "name": "1",
+            "description": "The leader will write the record to itself but will not await acknowledgement from replicas."
+        }
+    }
+}

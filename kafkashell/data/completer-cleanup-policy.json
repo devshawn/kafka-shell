@@ -1,0 +1,12 @@
+{
+    "values": {
+        "delete": {
+            "name": "delete",
+            "description": "Discard old segments when their retention time or size limit has been reached."
+        },
+        "compact": {
+            "name": "compact",
+            "description": "Enable log compaction which retains at least the last message for each key for a single topic partition."
+        }
+    }
+}

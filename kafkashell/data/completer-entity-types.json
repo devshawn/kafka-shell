@@ -1,0 +1,20 @@
+{
+    "values": {
+        "topic": {
+            "name": "topic",
+            "description": "Add, modify, or remove configurations for a topic."
+        },
+        "broker": {
+            "name": "broker",
+            "description": "Add, modify, or remove configurations for a broker."
+        },
+        "client": {
+            "name": "client",
+            "description": "Add, modify, or remove configurations for a client."
+        },
+        "user": {
+            "name": "user",
+            "description": "Add, modify, or remove configurations for a user."
+        }
+    }
+}

@@ -1,0 +1,56 @@
+{
+    "type": "object",
+    "title": "kafka-shell JSON schema for kafka resource pattern type values",
+    "required": [
+        "values"
+    ],
+    "properties": {
+        "values": {
+            "type": "object",
+            "title": "Values",
+            "description": "The list of resource pattern types.",
+            "patternProperties": {
+                "^(ANY|LITERAL|MATCH|PREFIXED)$": {
+                    "type": "object",
+                    "title": "Resource Pattern Type",
+                    "description": "A resource pattern type.",
+                    "required": [
+                        "name",
+                        "description"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Name",
+                            "description": "The name of the resource pattern type.",
+                            "default": "LITERAL",
+                            "examples": [
+                                "ANY",
+                                "LITERAL"
+                            ],
+                            "enum": [
+                                "ANY",
+                                "LITERAL",
+                                "MATCH",
+                                "PREFIXED"
+                            ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "Description",
+                            "description": "The description of the resource pattern type. This is shown when inline help is enabled.",
+                            "default": "",
+                            "examples": [
+                                "Match any pattern type."
+                            ],
+                            "pattern": "^[^\\s].+[.][^\\s]*$"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,58 @@
+{
+    "type": "object",
+    "title": "kafka-shell JSON schema for cleanup.policy values",
+    "required": [
+        "values"
+    ],
+    "properties": {
+        "values": {
+            "type": "object",
+            "title": "Values",
+            "description": "The list of cleanup policy values.",
+            "required": [
+                "compact",
+                "delete"
+            ],
+            "patternProperties": {
+                "^(compact|delete)$": {
+                    "type": "object",
+                    "title": "Cleanup Policy",
+                    "description": "A cleanup policy.",
+                    "required": [
+                        "name",
+                        "description"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Name",
+                            "description": "The name of the cleanup policy.",
+                            "default": "delete",
+                            "examples": [
+                                "delete",
+                                "compact"
+                            ],
+                            "enum": [
+                                "delete",
+                                "compact"
+                            ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "Description",
+                            "description": "The description of the cleanup policy. This is shown when inline help is enabled.",
+                            "default": "",
+                            "examples": [
+                                "Discard old segments when their retention time or size limit has been reached."
+                            ],
+                            "pattern": "^[^\\s].+[.][^\\s]*$"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,56 @@
+{
+    "type": "object",
+    "title": "kafka-shell JSON schema for kafka ack values",
+    "required": [
+        "values"
+    ],
+    "properties": {
+        "values": {
+            "type": "object",
+            "title": "Values",
+            "description": "The list of ack values.",
+            "patternProperties": {
+                "^(all|-1|0|1)$": {
+                    "type": "object",
+                    "title": "Ack Value",
+                    "description": "An ack value.",
+                    "required": [
+                        "name",
+                        "description"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Name",
+                            "description": "The ack value.",
+                            "examples": [
+                                "-1",
+                                "0",
+                                "all"
+                            ],
+                            "enum": [
+                                "all",
+                                "-1",
+                                "0",
+                                "1"
+                            ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "Description",
+                            "description": "The description of the ack value. This is shown when inline help is enabled.",
+                            "default": "",
+                            "examples": [
+                                "The producer will not wait for any acknowledgment from the server at all."
+                            ],
+                            "pattern": "^[^\\s].+[.][^\\s]*$"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,12 @@
+.idea/
+venv/
+dist/
+build/
+htmlcov/
+.pytest_cache/
+/*.egg-info
+__pycache__
+*.iml
+*.pyc
+.coverage
+.tox/

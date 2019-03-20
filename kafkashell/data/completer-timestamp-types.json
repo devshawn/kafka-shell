@@ -1,0 +1,12 @@
+{
+    "values": {
+        "CreateTime": {
+            "name": "CreateTime",
+            "description": "The timestamp in the message will be the message create time."
+        },
+        "LogAppendTime": {
+            "name": "LogAppendTime",
+            "description": "The timestamp in the message will be the log append time."
+        }
+    }
+}

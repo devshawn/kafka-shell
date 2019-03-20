@@ -1,0 +1,12 @@
+{
+    "values": {
+        "TABULAR": {
+            "name": "TABULAR",
+            "description": "Output in TABULAR format."
+        },
+        "JSON": {
+            "name": "JSON",
+            "description": "Output in JSON format."
+        }
+    }
+}

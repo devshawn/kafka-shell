@@ -1,0 +1,64 @@
+{
+    "type": "object",
+    "title": "kafka-shell JSON schema for compression codec values",
+    "required": [
+        "values"
+    ],
+    "properties": {
+        "values": {
+            "type": "object",
+            "title": "Values",
+            "description": "The list of compression codecs.",
+            "required": [
+                "none",
+                "gzip",
+                "snappy",
+                "lz4",
+                "zstd"
+            ],
+            "patternProperties": {
+                "^(none|gzip|snappy|lz4|zstd)$": {
+                    "type": "object",
+                    "title": "Compression Codec",
+                    "description": "A compression codec.",
+                    "required": [
+                        "name",
+                        "description"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Name",
+                            "description": "The name of the compression codec.",
+                            "default": "gzip",
+                            "examples": [
+                                "gzip",
+                                "none"
+                            ],
+                            "enum": [
+                                "none",
+                                "gzip",
+                                "snappy",
+                                "lz4",
+                                "zstd"
+                            ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "Description",
+                            "description": "The description of the compression codec. This is shown when inline help is enabled.",
+                            "default": "",
+                            "examples": [
+                                "Use the gzip compression codec."
+                            ],
+                            "pattern": "^[^\\s].+[.][^\\s]*$"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

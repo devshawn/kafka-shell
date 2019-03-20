@@ -1,0 +1,90 @@
+{
+    "type": "object",
+    "title": "kafka-shell JSON schema for kafka configuration values",
+    "required": [
+        "values"
+    ],
+    "properties": {
+        "values": {
+            "type": "object",
+            "title": "Values",
+            "description": "The list of kafka configuration keys.",
+            "patternProperties": {
+                "^(.*)$": {
+                    "type": "object",
+                    "title": "Kafka Configuration",
+                    "description": "A kafka configuration key.",
+                    "required": [
+                        "name",
+                        "description",
+                        "types"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Name",
+                            "description": "The name (key) of the Kafka configuration. This should match the object's key.",
+                            "default": "",
+                            "examples": [
+                                "min.insync.replicas",
+                                "cleanup.policy"
+                            ],
+                            "pattern": "^[a-zA-Z]+((\\.|\\_|\\-)[a-zA-Z0-9]+)*$"
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "Description",
+                            "description": "The description of the configuration. This is shown when inline help is enabled.",
+                            "default": "",
+                            "examples": [
+                                "Minimum number of replicas that must acknowledge a write for the write to be considered successful.",
+                                "A string that is either 'delete' or 'compact'."
+                            ],
+                            "pattern": "^[^\\s].+[.][^\\s]*$"
+                        },
+                        "types": {
+                            "type": "array",
+                            "title": "Types",
+                            "description": "The entity type(s) this configuration can be used for (i.e. brokers, topics).",
+                            "default": [],
+                            "examples": [
+                                "brokers",
+                                "topics"
+                            ],
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "brokers",
+                                    "topics",
+                                    "users",
+                                    "clients"
+                                ]
+                            },
+                            "uniqueItems": true,
+                            "minItems": 1,
+                            "maxItems": 4
+                        },
+                        "completer": {
+                            "type": "string",
+                            "title": "Completer",
+                            "description": "The completer JSON file to use for auto completion of values for this config.",
+                            "default": "",
+                            "examples": [
+                                "cleanup-policy"
+                            ],
+                            "enum": [
+                                "cleanup-policy",
+                                "compression-codecs",
+                                "timestamp-types",
+                                "booleans"
+                            ]
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

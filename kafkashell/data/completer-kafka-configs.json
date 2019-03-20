@@ -1,0 +1,706 @@
+{
+    "values": {
+        "advertised.listeners": {
+            "name": "advertised.listeners",
+            "description": "Listeners to publish to ZooKeeper for clients to use.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "background.threads": {
+            "name": "background.threads",
+            "description": "The number of threads to use for various background processing tasks.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "cleanup.policy": {
+            "name": "cleanup.policy",
+            "description": "Designate the retention policy to use on old log segments.",
+            "types": [
+                "topics"
+            ],
+            "completer": "cleanup-policy"
+        },
+        "compression.type": {
+            "name": "compression.type",
+            "description": "Specify the final compression type for a given topic.",
+            "types": [
+                "brokers",
+                "topics"
+            ],
+            "completer": "compression-codecs"
+        },
+        "consumer_byte_rate": {
+            "name": "consumer_byte_rate",
+            "description": "Specify the consumer byte rate quota.",
+            "types": [
+                "clients",
+                "users"
+            ]
+        },
+        "delete.retention.ms": {
+            "name": "delete.retention.ms",
+            "description": "The amount of time to retain delete tombstone markers for log compacted topics.",
+            "types": [
+                "topics"
+            ]
+        },
+        "file.delete.delay.ms": {
+            "name": "file.delete.delay.ms",
+            "description": "The time to wait before deleting a file from the filesystem.",
+            "types": [
+                "topics"
+            ]
+        },
+        "flush.messages": {
+            "name": "flush.messages",
+            "description": "Specify an interval at which we will force an fsync of data written to the log.",
+            "types": [
+                "topics"
+            ]
+        },
+        "flush.ms": {
+            "name": "flush.ms",
+            "description": "Specify a time interval at which we will force an fsync of data written to the log.",
+            "types": [
+                "topics"
+            ]
+        },
+        "follower.replication.throttled.rate": {
+            "name": "follower.replication.throttled.rate",
+            "description": "Throttle replication rate for followers.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "follower.replication.throttled.replicas": {
+            "name": "follower.replication.throttled.replicas",
+            "description": "Throttle replication rate for specific replicas for followers.",
+            "types": [
+                "topics"
+            ]
+        },
+        "index.interval.bytes": {
+            "name": "index.interval.bytes",
+            "description": "Specify how frequently Kafka adds an index entry to its offset index.",
+            "types": [
+                "topics"
+            ]
+        },
+        "leader.replication.throttled.rate": {
+            "name": "leader.replication.throttled.rate",
+            "description": "Throttle replication rate for leaders.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "leader.replication.throttled.replicas": {
+            "name": "leader.replication.throttled.replicas",
+            "description": "Throttle replication rate for specific replicas for leaders.",
+            "types": [
+                "topics"
+            ]
+        },
+        "listener.security.protocol.map": {
+            "name": "listener.security.protocol.map",
+            "description": "Map between listener names and security protocols.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "listeners": {
+            "name": "listeners",
+            "description": "List of comma-separated URIs the REST API will listen on.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.cleaner.backoff.ms": {
+            "name": "log.cleaner.backoff.ms",
+            "description": "The amount of time to sleep when there are no logs to clean.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.cleaner.dedupe.buffer.size": {
+            "name": "log.cleaner.dedupe.buffer.size",
+            "description": "The total memory used for log deduplication across all cleaner threads.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.cleaner.delete.retention.ms": {
+            "name": "log.cleaner.delete.retention.ms",
+            "description": "Specify how long delete records are retained.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.cleaner.io.buffer.load.factor": {
+            "name": "log.cleaner.io.buffer.load.factor",
+            "description": "Specify the log cleaner dedupe buffer load factor.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.cleaner.io.buffer.size": {
+            "name": "log.cleaner.io.buffer.size",
+            "description": "The total memory used for log cleaner I/O buffers across all cleaner threads.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.cleaner.io.max.bytes.per.second": {
+            "name": "log.cleaner.io.max.bytes.per.second",
+            "description": "Throttle the log cleaner's max bytes per second to be less than this value.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.cleaner.min.cleanable.ratio": {
+            "name": "log.cleaner.min.cleanable.ratio",
+            "description": "The minimum ratio of dirty log to total log for a log to eligible for cleaning.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.cleaner.min.compaction.lag.ms": {
+            "name": "log.cleaner.min.compaction.lag.ms",
+            "description": "The minimum time a message in a compacted topic will remain uncompacted in the log.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.cleaner.threads": {
+            "name": "log.cleaner.threads",
+            "description": "The number of background threads to use for log cleaning.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.cleanup.policy": {
+            "name": "log.cleanup.policy",
+            "description": "The default cleanup policy for segments beyond the retention window.",
+            "types": [
+                "brokers"
+            ],
+            "completer": "cleanup-policy"
+        },
+        "log.flush.interval.messages": {
+            "name": "log.flush.interval.messages",
+            "description": "The number of messages accumulated on a log partition before messages are flushed to disk.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.flush.interval.ms": {
+            "name": "log.flush.interval.ms",
+            "description": "The maximum time in ms that a message in any topic is kept in memory before flushed to disk.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.index.interval.bytes": {
+            "name": "log.index.interval.bytes",
+            "description": "The interval with which we add an entry to the offset index.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.index.size.max.bytes": {
+            "name": "log.index.size.max.bytes",
+            "description": "The maximum size in bytes of the offset index.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.message.downconversion.enable": {
+            "name": "log.message.downconversion.enable",
+            "description": "Speicy whether down-conversion of message formats is enabled to satisfy consume requests.",
+            "types": [
+                "brokers"
+            ],
+            "completer": "booleans"
+        },
+        "log.message.timestamp.difference.max.ms": {
+            "name": "log.message.timestamp.difference.max.ms",
+            "description": "The max difference allowed between the timestamp when a broker receives a message and the timestamp in the message.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.message.timestamp.type": {
+            "name": "log.message.timestamp.type",
+            "description": "Specify whether the timestamp in the message is message create time or log append time.",
+            "types": [
+                "brokers"
+            ],
+            "completer": "timestamp-types"
+        },
+        "log.preallocate": {
+            "name": "log.preallocate",
+            "description": "Specify whether Kafka should pre allocate files when creating new segment.",
+            "types": [
+                "brokers"
+            ],
+            "completer": "booleans"
+        },
+        "log.retention.bytes": {
+            "name": "log.retention.bytes",
+            "description": "The maximum size of the log before deleting it.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.retention.ms": {
+            "name": "log.retention.ms",
+            "description": "The number of milliseconds to keep a log file before deleting it.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.roll.jitter.ms": {
+            "name": "log.roll.jitter.ms",
+            "description": "The maximum jitter to subtract from logRollTimeMillis.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.roll.ms": {
+            "name": "log.roll.ms",
+            "description": "The maximum time before a new log segment is rolled out.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.segment.bytes": {
+            "name": "log.segment.bytes",
+            "description": "The maximum size of a single log file.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "log.segment.delete.delay.ms": {
+            "name": "log.segment.delete.delay.ms",
+            "description": "The amount of time to wait before deleting a file from the filesystem.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "max.connections.per.ip": {
+            "name": "max.connections.per.ip",
+            "description": "The maximum number of connections we allow from each ip address.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "max.connections.per.ip.overrides": {
+            "name": "max.connections.per.ip.overrides",
+            "description": "A comma-separated list of per-ip overrides to the default maximum number of connections.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "max.message.bytes": {
+            "name": "max.message.bytes",
+            "description": "The largest record batch size allowed by Kafka.",
+            "types": [
+                "topics"
+            ]
+        },
+        "message.downconversion.enable": {
+            "name": "message.downconversion.enable",
+            "description": "Specify whether down-conversion of message formats is enabled to satisfy consume requests.",
+            "types": [
+                "topics"
+            ],
+            "completer": "booleans"
+        },
+        "message.format.version": {
+            "name": "message.format.version",
+            "description": "Specify the message format version the broker will use to append messages to the logs.",
+            "types": [
+                "topics"
+            ]
+        },
+        "message.max.bytes": {
+            "name": "message.max.bytes",
+            "description": "The largest record batch size allowed by Kafka.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "message.timestamp.difference.max.ms": {
+            "name": "message.timestamp.difference.max.ms",
+            "description": "The max difference allowed between the timestamp when a broker receives a message and the timestamp in the message.",
+            "types": [
+                "topics"
+            ]
+        },
+        "message.timestamp.type": {
+            "name": "message.timestamp.type",
+            "description": "Specify whether the timestamp in the message is message create time or log append time.",
+            "types": [
+                "topics"
+            ],
+            "completer": "timestamp-types"
+        },
+        "metric.reporters": {
+            "name": "metric.reporters",
+            "description": "A list of classes to use as metrics reporters.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "min.cleanable.dirty.ratio": {
+            "name": "min.cleanable.dirty.ratio",
+            "description": "Specify how frequently the log compactor will attempt to clean the log.",
+            "types": [
+                "topics"
+            ]
+        },
+        "min.compaction.lag.ms": {
+            "name": "min.compaction.lag.ms",
+            "description": "The minimum time a message will remain uncompacted in the log.",
+            "types": [
+                "topics"
+            ]
+        },
+        "min.insync.replicas": {
+            "name": "min.insync.replicas",
+            "description": "Minimum number of replicas that must acknowledge a write for the write to be considered successful.",
+            "types": [
+                "brokers",
+                "topics"
+            ]
+        },
+        "num.io.threads": {
+            "name": "num.io.threads",
+            "description": "The number of threads that the server uses for processing requests.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "num.network.threads": {
+            "name": "num.network.threads",
+            "description": "The number of threads that are used for sending and receiving requests.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "num.recovery.threads.per.data.dir": {
+            "name": "num.recovery.threads.per.data.dir",
+            "description": "The number of threads per data directory used for log recovery at startup and flushing at shutdown.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "num.replica.fetchers": {
+            "name": "num.replica.fetchers",
+            "description": "Number of fetcher threads used to replicate messages from a source broker.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "preallocate": {
+            "name": "preallocate",
+            "description": "Specify whether Kafka should pre allocate files when creating new segment.",
+            "types": [
+                "topics"
+            ],
+            "completer": "booleans"
+        },
+        "principal.builder.class": {
+            "name": "principal.builder.class",
+            "description": "The fully qualified name of a class used to build the KafkaPrincipal object for authorization.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "producer_byte_rate": {
+            "name": "producer_byte_rate",
+            "description": "Specify the producer byte rate quota.",
+            "types": [
+                "clients",
+                "users"
+            ]
+        },
+        "request_percentage": {
+            "name": "request_percentage",
+            "description": "The percentage per quota window, above which the request may be throttled.",
+            "types": [
+                "clients",
+                "users"
+            ]
+        },
+        "retention.bytes": {
+            "name": "retention.bytes",
+            "description": "The maximum size a partition can grow before old log segments will be discarded.",
+            "types": [
+                "topics"
+            ]
+        },
+        "retention.ms": {
+            "name": "retention.ms",
+            "description": "The maximum time a log will be retained old log segments will be discarded.",
+            "types": [
+                "topics"
+            ]
+        },
+        "sasl.enabled.mechanisms": {
+            "name": "sasl.enabled.mechanisms",
+            "description": "The list of SASL mechanisms enabled for the Kafka server.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "sasl.jaas.config": {
+            "name": "sasl.jaas.config",
+            "description": "JAAS login context parameters for SASL connections in the format used by JAAS config files.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "sasl.kerberos.kinit.cmd": {
+            "name": "sasl.kerberos.kinit.cmd",
+            "description": "Kerberos kinit command path.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "sasl.kerberos.min.time.before.relogin": {
+            "name": "sasl.kerberos.min.time.before.relogin",
+            "description": "Login thread sleep time between refresh attempts.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "sasl.kerberos.principal.to.local.rules": {
+            "name": "sasl.kerberos.principal.to.local.rules",
+            "description": "A list of rules for mapping from principal names to short names.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "sasl.kerberos.service.name": {
+            "name": "sasl.kerberos.service.name",
+            "description": "The Kerberos principal name that Kafka runs as.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "sasl.kerberos.ticket.renew.jitter": {
+            "name": "sasl.kerberos.ticket.renew.jitter",
+            "description": "Percentage of random jitter added to the renewal time.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "sasl.kerberos.ticket.renew.window.factor": {
+            "name": "sasl.kerberos.ticket.renew.window.factor",
+            "description": "Login thread will sleep until the specified window factor has been reached.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "sasl.login.refresh.buffer.seconds": {
+            "name": "sasl.login.refresh.buffer.seconds",
+            "description": "The amount of buffer time before credential expiration to maintain when refreshing a credential.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "sasl.login.refresh.min.period.seconds": {
+            "name": "sasl.login.refresh.min.period.seconds",
+            "description": "The minimum time for the login refresh thread to wait before refreshing a credential.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "sasl.login.refresh.window.factor": {
+            "name": "sasl.login.refresh.window.factor",
+            "description": "Login refresh thread will sleep until the specified window factor has been reached.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "sasl.login.refresh.window.jitter": {
+            "name": "sasl.login.refresh.window.jitter",
+            "description": "The maximum amount of random jitter that is added to the login refresh thread's sleep time.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "sasl.mechanism.inter.broker.protocol": {
+            "name": "sasl.mechanism.inter.broker.protocol",
+            "description": "SASL mechanism used for inter-broker communication.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "SCRAM-SHA-256": {
+            "name": "SCRAM-SHA-256",
+            "description": "SCRAM-SHA-256 SASL mechanism.",
+            "types": [
+                "users"
+            ]
+        },
+        "SCRAM-SHA-512": {
+            "name": "SCRAM-SHA-512",
+            "description": "SCRAM-SHA-512 SASL mechanism.",
+            "types": [
+                "users"
+            ]
+        },
+        "segment.bytes": {
+            "name": "segment.bytes",
+            "description": "The maximum size of a single log file.",
+            "types": [
+                "topics"
+            ]
+        },
+        "segment.index.bytes": {
+            "name": "segment.index.bytes",
+            "description": "The size of the index that maps offsets to file positions.",
+            "types": [
+                "topics"
+            ]
+        },
+        "segment.jitter.ms": {
+            "name": "segment.jitter.ms",
+            "description": "The maximum random jitter subtracted from the scheduled segment roll time.",
+            "types": [
+                "topics"
+            ]
+        },
+        "segment.ms": {
+            "name": "segment.ms",
+            "description": "The period of time after which Kafka will force the log to roll even if the segment file isn't full.",
+            "types": [
+                "topics"
+            ]
+        },
+        "ssl.cipher.suites": {
+            "name": "ssl.cipher.suites",
+            "description": "A list of cipher suites.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.client.auth": {
+            "name": "ssl.client.auth",
+            "description": "Configures Kafka to request client authentication.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.enabled.protocols": {
+            "name": "ssl.enabled.protocols",
+            "description": "The list of protocols enabled for SSL connections.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.endpoint.identification.algorithm": {
+            "name": "ssl.endpoint.identification.algorithm",
+            "description": "The endpoint identification algorithm to validate server hostname using server certificate.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.key.password": {
+            "name": "ssl.key.password",
+            "description": "The password of the private key in the key store file.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.keymanager.algorithm": {
+            "name": "ssl.keymanager.algorithm",
+            "description": "The algorithm used by key manager factory for SSL connections.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.keystore.location": {
+            "name": "ssl.keystore.location",
+            "description": "The location of the key store file.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.keystore.password": {
+            "name": "ssl.keystore.password",
+            "description": "The store password for the key store file.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.keystore.type": {
+            "name": "ssl.keystore.type",
+            "description": "The file format of the key store file.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.protocol": {
+            "name": "ssl.protocol",
+            "description": "The SSL protocol used to generate the SSLContext.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.provider": {
+            "name": "ssl.provider",
+            "description": "The name of the security provider used for SSL connections.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.secure.random.implementation": {
+            "name": "ssl.secure.random.implementation",
+            "description": "The SecureRandom PRNG implementation to use for SSL cryptography operations.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.trustmanager.algorithm": {
+            "name": "ssl.trustmanager.algorithm",
+            "description": "The algorithm used by trust manager factory for SSL connections.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.truststore.location": {
+            "name": "ssl.truststore.location",
+            "description": "The location of the trust store file.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.truststore.password": {
+            "name": "ssl.truststore.password",
+            "description": "The password for the trust store file.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "ssl.truststore.type": {
+            "name": "ssl.truststore.type",
+            "description": "The file format of the trust store file.",
+            "types": [
+                "brokers"
+            ]
+        },
+        "unclean.leader.election.enable": {
+            "name": "unclean.leader.election.enable",
+            "description": "Enable replicas not in the ISR set to be elected as leader (DATA LOSS CAN OCCUR).",
+            "types": [
+                "brokers",
+                "topics"
+            ],
+            "completer": "booleans"
+        }
+    }
+}

@@ -1,0 +1,112 @@
+{
+    "type": "object",
+    "title": "kafka-shell autocomplete commands JSON schema",
+    "required": [
+        "commands"
+    ],
+    "properties": {
+        "commands": {
+            "type": "object",
+            "title": "Commands",
+            "description": "The list of supported commands.",
+            "patternProperties": {
+                "^[a-z]+(-[a-z]+)*$": {
+                    "type": "object",
+                    "title": "Command",
+                    "description": "A command that can be autocompleted.",
+                    "required": [
+                        "name",
+                        "description"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Name",
+                            "description": "The name of the command. This should match the object's key.",
+                            "default": "",
+                            "examples": [
+                                "kafka-topics",
+                                "kafka-console-consumer"
+                            ],
+                            "pattern": "^[a-z]+(-[a-z]+)*$"
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "Description",
+                            "description": "The description of the command. This is shown when inline help is enabled.",
+                            "default": "",
+                            "examples": [
+                                "Manage topics within a cluster."
+                            ],
+                            "pattern": "^[^\\s].+[.][^\\s]*$"
+                        },
+                        "options": {
+                            "type": "object",
+                            "title": "Options",
+                            "description": "List of options, arguments, and flags for the command.",
+                            "patternProperties": {
+                                "^(--|--[a-z.\\-]*[^\\s])$": {
+                                    "type": "object",
+                                    "title": "Option",
+                                    "description": "An option, argument, or flag for the command.",
+                                    "required": [
+                                        "name",
+                                        "description"
+                                    ],
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "title": "Name",
+                                            "description": "The name of the option. This should match the object's key.",
+                                            "default": "",
+                                            "examples": [
+                                                "--config",
+                                                "--query-timeout"
+                                            ],
+                                            "pattern": "^(--|--[a-z.\\-]*[^\\s])$"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "title": "Description",
+                                            "description": "The description of the option. This is shown when inline help is enabled.",
+                                            "default": "",
+                                            "examples": [
+                                                "Create a new topic.",
+                                                "List details for the given topics."
+                                            ],
+                                            "pattern": "^[^\\s].+[.][^\\s]*$"
+                                        },
+                                        "completer": {
+                                            "type": "string",
+                                            "title": "Completer",
+                                            "description": "The completer JSON file to use for auto completion of values for this option.",
+                                            "default": "",
+                                            "examples": [
+                                                "kafka-configs",
+                                                "reset-policies"
+                                            ],
+                                            "enum": [
+                                                "kafka-configs",
+                                                "reset-policies",
+                                                "resource-pattern-types",
+                                                "ksql-output",
+                                                "acks",
+                                                "compression-codecs",
+                                                "entity-types"
+                                            ]
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

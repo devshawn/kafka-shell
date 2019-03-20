@@ -1,0 +1,233 @@
+{
+    "type": "object",
+    "title": "kafka-shell user configuration JSON schema",
+    "required": [
+        "version",
+        "enable",
+        "cluster",
+        "clusters"
+    ],
+    "properties": {
+        "version": {
+            "type": "integer",
+            "title": "Version",
+            "description": "The version of the configuration schema. Currently, it must be 1.",
+            "default": 1,
+            "enum": [
+                1
+            ]
+        },
+        "enable": {
+            "type": "object",
+            "title": "Feature Toggles",
+            "description": "Enable or disable features within the shell.",
+            "required": [
+                "history",
+                "save_on_exit",
+                "auto_complete",
+                "auto_suggest",
+                "inline_help",
+                "fuzzy_search"
+            ],
+            "properties": {
+                "history": {
+                    "type": "boolean",
+                    "title": "Enable History",
+                    "description": "If enabled, history will be saved between sessions to ~/.kafka-shell-history.",
+                    "default": true,
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "save_on_exit": {
+                    "type": "boolean",
+                    "title": "Enable Save On Exit",
+                    "description": "If enabled, user configuration changes will be saved on exit from kafka-shell.",
+                    "default": true,
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "auto_complete": {
+                    "type": "boolean",
+                    "title": "Enable Auto Complete",
+                    "description": "If enabled, the autocomplete dropdown will be shown as you type.",
+                    "default": true,
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "auto_suggest": {
+                    "type": "boolean",
+                    "title": "Enable Auto Suggest",
+                    "description": "If enabled, suggestions from history will be shown as gray text (like the fish shell).",
+                    "default": true,
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "inline_help": {
+                    "type": "boolean",
+                    "title": "Enable Inline Help",
+                    "description": "Enable inline help and descriptions of commands within the autocomplete dropdown.",
+                    "default": true,
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "fuzzy_search": {
+                    "type": "boolean",
+                    "title": "Enable Fuzzy Search",
+                    "description": "Enable fuzzy searching of autocomplete dropdown selections.",
+                    "default": true,
+                    "examples": [
+                        true,
+                        false
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "cluster": {
+            "type": "string",
+            "title": "Selected Cluster",
+            "description": "The default cluster to be selected on initialization of kafka-shell.",
+            "default": "local",
+            "examples": [
+                "local",
+                "test-cluster"
+            ],
+            "pattern": "^(.*)$"
+        },
+        "clusters": {
+            "type": "object",
+            "title": "List of clusters to be used",
+            "patternProperties": {
+                "^(.*)$": {
+                    "type": "object",
+                    "title": "Cluster",
+                    "description": "Properties for a Kafka cluster",
+                    "properties": {
+                        "bootstrap_servers": {
+                            "type": "string",
+                            "title": "Kafka Bootstrap Servers",
+                            "description": "The Kafka broker(s) to connect to.",
+                            "default": "",
+                            "examples": [
+                                "localhost:9092"
+                            ],
+                            "pattern": "^(.*)$"
+                        },
+                        "zookeeper_connect": {
+                            "type": "string",
+                            "title": "Zookeeper Connect URL",
+                            "description": "The Zookeeper nodes to connect to.",
+                            "default": "",
+                            "examples": [
+                                "localhost:2181"
+                            ],
+                            "pattern": "^(.*)$"
+                        },
+                        "schema_registry_url": {
+                            "type": "string",
+                            "title": "Schema Registry URL",
+                            "description": "The Schema Registry URL to connect to.",
+                            "default": "",
+                            "examples": [
+                                "http://localhost:8081"
+                            ],
+                            "pattern": "^https?://(.*)$"
+                        },
+                        "ksql_server_url": {
+                            "type": "string",
+                            "title": "KSQL Server URL",
+                            "description": "The KSQL Server URL to connect to.",
+                            "default": "",
+                            "examples": [
+                                "http://localhost:8088"
+                            ],
+                            "pattern": "^https?://(.*)$"
+                        },
+                        "command_prefix": {
+                            "type": "string",
+                            "title": "Command Prefix",
+                            "description": "Prefix all commands with another command, such as a 'docker exec'.",
+                            "default": "",
+                            "examples": [
+                                "docker run --net=host -it --entrypoint run devshawn/confluent-tools"
+                            ],
+                            "pattern": "^(.*)$"
+                        },
+                        "consumer_settings": {
+                            "type": "object",
+                            "title": "Consumer Settings",
+                            "description": "Settings for configuring consumer CLI tools.",
+                            "properties": {
+                                "config": {
+                                    "type": "string",
+                                    "title": "Consumer Config",
+                                    "description": "Configuration path for properties file passed to --consumer.config.",
+                                    "default": "",
+                                    "examples": [
+                                        "/tmp/consumer.properties"
+                                    ],
+                                    "pattern": "^(.*).properties$"
+                                },
+                                "properties": {
+                                    "type": "object",
+                                    "title": "Consumer Properties",
+                                    "description": "Properties to send to the consumer CLIs by default.",
+                                    "patternProperties": {
+                                        "^(.*)$": {
+                                            "title": "Consumer Property",
+                                            "description": "Property to send to the consumer CLIs by default."
+                                        }
+                                    }
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "producer_settings": {
+                            "type": "object",
+                            "title": "Producer Settings",
+                            "description": "Settings for configuring producer CLI tools.",
+                            "properties": {
+                                "config": {
+                                    "type": "string",
+                                    "title": "Consumer Config",
+                                    "description": "Configuration path for properties file passed to --producer.config.",
+                                    "default": "",
+                                    "examples": [
+                                        "/tmp/producer.properties"
+                                    ],
+                                    "pattern": "^(.*).properties$"
+                                },
+                                "properties": {
+                                    "type": "object",
+                                    "title": "Producer Properties",
+                                    "description": "Properties to send to the producer CLIs by default.",
+                                    "patternProperties": {
+                                        "^[a-z]+(\\.[a-z]+)*$": {
+                                            "title": "Producer Property",
+                                            "description": "Property to send to the producer CLIs by default."
+                                        }
+                                    },
+                                    "additionalProperties": true
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

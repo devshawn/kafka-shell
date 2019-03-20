@@ -1,0 +1,12 @@
+{
+    "values": {
+        "true": {
+            "name": "true",
+            "description": "Sets the value to truthy."
+        },
+        "false": {
+            "name": "false",
+            "description": "Sets the value to falsy."
+        }
+    }
+}

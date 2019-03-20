@@ -1,0 +1,24 @@
+{
+    "values": {
+        "none": {
+            "name": "none",
+            "description": "Use no compression codec."
+        },
+        "gzip": {
+            "name": "gzip",
+            "description": "Use the gzip compression codec."
+        },
+        "snappy": {
+            "name": "snappy",
+            "description": "Use the snappy compression codec."
+        },
+        "lz4": {
+            "name": "lz4",
+            "description": "Use the lz4 compression codec."
+        },
+        "zstd": {
+            "name": "zstd",
+            "description": "Use the zstd compression codec."
+        }
+    }
+}
