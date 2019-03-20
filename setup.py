@@ -34,7 +34,7 @@ setuptools.setup(
     },
     keywords=("kafka", "shell", "prompt", "apache", "autocomplete", "streams", "cli"),
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Intended Audience :: System Administrators",
         "License :: OSI Approved :: Apache Software License",
