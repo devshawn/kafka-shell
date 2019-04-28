@@ -81,6 +81,7 @@ Currently, the following commands are supported:
 * `kafka-verifiable-producer`
 * `kafka-preferred-replica-election`
 * `kafka-replica-verification`
+* `kafka-reassign-partitions`
 * `kafka-broker-api-versions`
 * `kafka-consumer-groups`
 * `kafka-delete-records`

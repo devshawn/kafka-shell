@@ -146,6 +146,18 @@ test_data = [
         "kafka-replica-verification --broker-list broker1:9092,broker2:9093 --fetch-size 1024"
     ),
     (
+        "kafka-reassign-partitions",
+        "kafka-reassign-partitions --bootstrap-server localhost:9092 --zookeeper localhost:2181"
+    ),
+    (
+        "kafka-reassign-partitions --verify",
+        "kafka-reassign-partitions --verify --bootstrap-server localhost:9092 --zookeeper localhost:2181"
+    ),
+    (
+        "kafka-reassign-partitions --command-config test.properties",
+        "kafka-reassign-partitions --command-config test.properties --bootstrap-server localhost:9092 --zookeeper localhost:2181"
+    ),
+    (
         "kafka-broker-api-versions",
         "kafka-broker-api-versions --bootstrap-server localhost:9092"
     ),
@@ -543,6 +555,26 @@ admin_client_test_data = [
         "kafka-preferred-replica-election --bootstrap-server test:9092 --admin.config admin.properties",
         "test-admin-client-settings"
     ),
+    (
+        "kafka-reassign-partitions",
+        "kafka-reassign-partitions --bootstrap-server localhost:9092 --zookeeper localhost:2181 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-reassign-partitions --command-config test.properties",
+        "kafka-reassign-partitions --command-config test.properties --bootstrap-server localhost:9092 --zookeeper localhost:2181",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-reassign-partitions --command-config test.properties --bootstrap-server broker1:9092",
+        "kafka-reassign-partitions --command-config test.properties --bootstrap-server broker1:9092 --zookeeper localhost:2181",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-reassign-partitions --zookeeper test:2181",
+        "kafka-reassign-partitions --zookeeper test:2181 --bootstrap-server localhost:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    )
 ]
 
 prefix_test_data = [
