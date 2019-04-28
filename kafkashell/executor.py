@@ -150,58 +150,64 @@ class Executor:
 
     def handle_kafka_configs_command(self, command):
         command += self.handle_zookeeper_flag(command)
+        command += self.handle_admin_client_settings(command)
         return command
 
     def handle_kafka_console_consumer_command(self, command):
         command += self.handle_bootstrap_server_flag(command)
-        command += self.handle_cli_settings("consumer")
+        command += self.handle_cli_settings(command, "consumer")
         return command
 
     def handle_kafka_console_producer_command(self, command):
         command += self.handle_broker_list_flag(command)
-        command += self.handle_cli_settings("producer")
+        command += self.handle_cli_settings(command, "producer")
         return command
 
     def handle_kafka_avro_console_consumer_command(self, command):
         command += self.handle_bootstrap_server_flag(command)
         command += self.handle_schema_registry_url_property(command)
-        command += self.handle_cli_settings("consumer")
+        command += self.handle_cli_settings(command, "consumer")
         return command
 
     def handle_kafka_avro_console_producer_command(self, command):
         command += self.handle_broker_list_flag(command)
         command += self.handle_schema_registry_url_property(command)
-        command += self.handle_cli_settings("producer")
+        command += self.handle_cli_settings(command, "producer")
         return command
 
     def handle_kafka_verifiable_consumer(self, command):
         command += self.handle_broker_list_flag(command)
-        command += self.handle_config("consumer.config", "consumer")
+        command += self.handle_config(command, "consumer.config", "consumer")
         return command
 
     def handle_kafka_verifiable_producer(self, command):
         command += self.handle_broker_list_flag(command)
-        command += self.handle_config("producer.config", "producer")
+        command += self.handle_config(command, "producer.config", "producer")
         return command
 
     def handle_kafka_consumer_groups_command(self, command):
         command += self.handle_bootstrap_server_flag(command)
+        command += self.handle_admin_client_settings(command)
         return command
 
     def handle_kafka_broker_api_versions_command(self, command):
         command += self.handle_bootstrap_server_flag(command)
+        command += self.handle_admin_client_settings(command)
         return command
 
     def handle_kafka_delete_records_command(self, command):
         command += self.handle_bootstrap_server_flag(command)
+        command += self.handle_admin_client_settings(command)
         return command
 
     def handle_kafka_log_dirs_command(self, command):
         command += self.handle_bootstrap_server_flag(command)
+        command += self.handle_admin_client_settings(command)
         return command
 
     def handle_kafka_acls_command(self, command):
         command += self.handle_bootstrap_server_flag(command)
+        command += self.handle_admin_client_settings(command)
         return command
 
     def handle_ksql_command(self, command):
@@ -248,18 +254,27 @@ class Executor:
     def handle_zookeeper_shell_input(self, command):
         return " " + self.settings.get_cluster_details()["zookeeper_connect"] if len(command.split()) == 1 else ""
 
-    def handle_cli_settings(self, settings_type):
+    def handle_admin_client_settings(self, command):
+        if "admin_client_settings" in self.settings.get_cluster_details().keys():
+            return self.handle_config(command, "command-config", "admin_client")
+        else:
+            return ""
+
+    def handle_cli_settings(self, command, settings_type):
         if "{0}_settings".format(settings_type) in self.settings.get_cluster_details().keys():
             return "".join([
-                self.handle_config("{0}.config".format(settings_type), settings_type),
+                self.handle_config(command, "{0}.config".format(settings_type), settings_type),
                 self.handle_properties(settings_type)
             ])
         else:
             return ""
 
-    def handle_config(self, config_prefix, settings_type):
-        config = self.get_config_from_settings(settings_type)
-        return " --{0} {1}".format(config_prefix, config) if config is not None else ""
+    def handle_config(self, command, config_prefix, settings_type):
+        if "--{}".format(config_prefix) not in command:
+            config = self.get_config_from_settings(settings_type)
+            return " --{0} {1}".format(config_prefix, config) if config is not None else ""
+        else:
+            return ""
 
     def handle_properties(self, settings_type):
         properties = self.get_properties_from_settings(settings_type)

@@ -58,15 +58,16 @@ Clusters can be defined to run commands against. Commands automatically add flag
 
 Each cluster should have a unique name (a key in the `clusters` root-level object). By default, the cluster `local` is added.
 
-| key                   | type         | description                                                   |
-|-----------------------|--------------|---------------------------------------------------------------|
-| `bootstrap_servers`   | string       | Comma-separated `host:port` Kafka brokers to connect to.      |
-| `zookeeper_connect`   | string       | Comma-separated `host:port` Zookeeper nodes to connect to.    |
-| `schema_registry_url` | string       | Schema Registry URL used when working with avro schemas.      |
-| `ksql_server_url`     | string       | KSQL Server URL used when utilizing the `ksql` command.       |
-| `command_prefix`      | string       | Prefix all commands with another command, i.e. 'docker exec'. |
-| `consumer_settings`   | ToolSettings | Pass config and default property settings to consumer CLIs.   |
-| `producer_settings`   | ToolSettings | Pass config and default property settings to producer CLIs.   |
+| key                     | type         | description                                                   |
+|-------------------------|--------------|---------------------------------------------------------------|
+| `bootstrap_servers`     | string       | Comma-separated `host:port` Kafka brokers to connect to.      |
+| `zookeeper_connect`     | string       | Comma-separated `host:port` Zookeeper nodes to connect to.    |
+| `schema_registry_url`   | string       | Schema Registry URL used when working with avro schemas.      |
+| `ksql_server_url`       | string       | KSQL Server URL used when utilizing the `ksql` command.       |
+| `command_prefix`        | string       | Prefix all commands with another command, i.e. 'docker exec'. |
+| `consumer_settings`     | ToolSettings | Pass config and default property settings to consumer CLIs.   |
+| `producer_settings`     | ToolSettings | Pass config and default property settings to producer CLIs.   |
+| `admin_client_settings` | ToolSettings | Pass config to admin clients through `--command-config`.   |
 
 
 #### Tool Settings
@@ -113,6 +114,8 @@ clusters:
       config: producer.properties
       properties:
         key.separator: ","
+    admin_client_settings:
+      config: admin.properties
 ```
 
 ### Example Commands
@@ -129,6 +132,12 @@ For example, if you typed the command `kafka-avro-console-producer --topic test`
 
 ```bash
 docker exec -it kafka-tools kafka-avro-console-producer --broker-list docker:9092 --property schema.registry.url=http://docker:8081 --producer.config producer.properties --property key.separtor=,
+```
+
+For example, if you typed the command `kafka-broker-api-versions`:
+
+```bash
+docker exec -it kafka-tools kafka-broker-api-versions --bootstrap-server docker:9092 --command-config admin.properties
 ```
 
 As you can see, you can save a ton of typing time by utilizing `kafka-shell`!
