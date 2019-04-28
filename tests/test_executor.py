@@ -114,6 +114,22 @@ test_data = [
         "kafka-consumer-groups --list --bootstrap-server test:9092"
     ),
     (
+        "kafka-replica-verification",
+        "kafka-replica-verification --broker-list localhost:9092"
+    ),
+    (
+        "kafka-replica-verification --fetch-size 1024",
+        "kafka-replica-verification --fetch-size 1024 --broker-list localhost:9092"
+    ),
+    (
+        "kafka-replica-verification --broker-list broker1:9092,broker2:9093",
+        "kafka-replica-verification --broker-list broker1:9092,broker2:9093"
+    ),
+    (
+        "kafka-replica-verification --broker-list broker1:9092,broker2:9093 --fetch-size 1024",
+        "kafka-replica-verification --broker-list broker1:9092,broker2:9093 --fetch-size 1024"
+    ),
+    (
         "kafka-broker-api-versions",
         "kafka-broker-api-versions --bootstrap-server localhost:9092"
     ),

@@ -79,6 +79,7 @@ Currently, the following commands are supported:
 * `kafka-avro-console-producer`
 * `kafka-verifiable-consumer`
 * `kafka-verifiable-producer`
+* `kafka-replica-verification`
 * `kafka-broker-api-versions`
 * `kafka-consumer-groups`
 * `kafka-delete-records`

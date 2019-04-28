@@ -792,6 +792,36 @@
                 }
             }
         },
+        "kafka-replica-verification": {
+            "name": "kafka-replica-verification",
+            "description": "Validate that all replicas for a set of topics have the same data.",
+            "options": {
+                "--broker-list": {
+                    "name": "--broker-list",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--fetch-size": {
+                    "name": "--fetch-size",
+                    "description": "The fetch size of each request in bytes. Default: 1048576."
+                },
+                "--max-wait-ms": {
+                    "name": "--max-wait-ms",
+                    "description": "The max amount of time each fetch request waits. Default: 1000."
+                },
+                "--report-interval-ms": {
+                    "name": "--report-interval-ms",
+                    "description": "The reporting interval. Default: 30000."
+                },
+                "--time": {
+                    "name": "--time",
+                    "description": "Timestamp for getting the initial offsets. Default: -1."
+                },
+                "--topic-white-list": {
+                    "name": "--topic-white-list",
+                    "description": "Whitelist of topics to verify replica consistency using Java regex. Default: '.*'."
+                }
+            }
+        },
         "kafka-broker-api-versions": {
             "name": "kafka-broker-api-versions",
             "description": "Retrieve broker version information.",
