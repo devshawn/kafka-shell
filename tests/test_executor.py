@@ -114,6 +114,22 @@ test_data = [
         "kafka-consumer-groups --list --bootstrap-server test:9092"
     ),
     (
+        "kafka-preferred-replica-election",
+        "kafka-preferred-replica-election --bootstrap-server localhost:9092"
+    ),
+    (
+        "kafka-preferred-replica-election",
+        "kafka-preferred-replica-election --bootstrap-server localhost:9092"
+    ),
+    (
+        "kafka-preferred-replica-election --bootstrap-server test:9092",
+        "kafka-preferred-replica-election --bootstrap-server test:9092"
+    ),
+    (
+        "kafka-preferred-replica-election --bootstrap-server test:9092 --admin.config test.properties",
+        "kafka-preferred-replica-election --bootstrap-server test:9092 --admin.config test.properties"
+    ),
+    (
         "kafka-replica-verification",
         "kafka-replica-verification --broker-list localhost:9092"
     ),
@@ -510,6 +526,21 @@ admin_client_test_data = [
     (
         "kafka-log-dirs --broker-list 0,1 --command-config test.properties --bootstrap-server test:9092",
         "kafka-log-dirs --broker-list 0,1 --command-config test.properties --bootstrap-server test:9092",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-preferred-replica-election",
+        "kafka-preferred-replica-election --bootstrap-server localhost:9092 --admin.config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-preferred-replica-election --admin.config testing.properties",
+        "kafka-preferred-replica-election --admin.config testing.properties --bootstrap-server localhost:9092",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-preferred-replica-election --bootstrap-server test:9092",
+        "kafka-preferred-replica-election --bootstrap-server test:9092 --admin.config admin.properties",
         "test-admin-client-settings"
     ),
 ]

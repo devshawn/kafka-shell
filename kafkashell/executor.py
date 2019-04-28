@@ -87,6 +87,9 @@ class Executor:
         elif command.startswith(constants.COMMAND_KAFKA_CONSUMER_GROUPS):
             final_command = self.handle_kafka_consumer_groups_command(command)
 
+        elif command.startswith(constants.COMMAND_KAFKA_PREFERRED_REPLICA_ELECTION):
+            final_command = self.handle_kafka_preferred_replica_election(command)
+
         elif command.startswith(constants.COMMAND_KAFKA_REPLICA_VERIFICATION):
             final_command = self.handle_kafka_replica_verification_command(command)
 
@@ -193,6 +196,11 @@ class Executor:
         command += self.handle_admin_client_settings(command)
         return command
 
+    def handle_kafka_preferred_replica_election(self, command):
+        command += self.handle_bootstrap_server_flag(command)
+        command += self.handle_admin_client_settings(command)
+        return command
+
     def handle_kafka_replica_verification_command(self, command):
         command += self.handle_broker_list_flag(command)
         return command
@@ -263,7 +271,9 @@ class Executor:
 
     def handle_admin_client_settings(self, command):
         if "admin_client_settings" in self.settings.get_cluster_details().keys():
-            return self.handle_config(command, "command-config", "admin_client")
+            admin_client_option = "command-config" if constants.COMMAND_KAFKA_PREFERRED_REPLICA_ELECTION \
+                                                      not in command else "admin.config"
+            return self.handle_config(command, admin_client_option, "admin_client")
         else:
             return ""
 
