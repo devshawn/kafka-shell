@@ -221,6 +221,24 @@
                                 }
                             },
                             "additionalProperties": false
+                        },
+                        "admin_client_settings": {
+                            "type": "object",
+                            "title": "Admin Client Settings",
+                            "description": "Settings for configuring admin client within the CLI tools.",
+                            "properties": {
+                                "config": {
+                                    "type": "string",
+                                    "title": "Admin Client Config",
+                                    "description": "Configuration path for properties file passed to --command-config.",
+                                    "default": "",
+                                    "examples": [
+                                        "/tmp/admin.properties"
+                                    ],
+                                    "pattern": "^(.*).properties$"
+                                }
+                            },
+                            "additionalProperties": false
                         }
                     },
                     "additionalProperties": false

@@ -206,6 +206,16 @@ consumer_test_data = [
         "test-consumer-settings"
     ),
     (
+        "kafka-console-consumer --from-beginning --topic test --consumer.config consumer.properties",
+        "kafka-console-consumer --from-beginning --topic test --consumer.config consumer.properties --bootstrap-server localhost:9092 --property key.separator=, --property print.key=true",
+        "test-consumer-settings"
+    ),
+    (
+        "kafka-console-consumer --from-beginning --topic test --consumer.config reader.properties",
+        "kafka-console-consumer --from-beginning --topic test --consumer.config reader.properties --bootstrap-server localhost:9092 --property key.separator=, --property print.key=true",
+        "test-consumer-settings"
+    ),
+    (
         "kafka-avro-console-consumer",
         "kafka-avro-console-consumer --bootstrap-server localhost:9092 --property schema.registry.url=http://localhost:8081 --consumer.config consumer.properties --property key.separator=, --property print.key=true",
         "test-consumer-settings"
@@ -213,6 +223,11 @@ consumer_test_data = [
     (
         "kafka-avro-console-consumer --topic test",
         "kafka-avro-console-consumer --topic test --bootstrap-server localhost:9092 --property schema.registry.url=http://localhost:8081 --consumer.config consumer.properties --property key.separator=, --property print.key=true",
+        "test-consumer-settings"
+    ),
+    (
+        "kafka-avro-console-consumer --consumer.config reader.properties --topic test",
+        "kafka-avro-console-consumer --consumer.config reader.properties --topic test --bootstrap-server localhost:9092 --property schema.registry.url=http://localhost:8081 --property key.separator=, --property print.key=true",
         "test-consumer-settings"
     ),
     (
@@ -231,6 +246,11 @@ consumer_test_data = [
         "test-consumer-settings"
     ),
     (
+        "kafka-verifiable-consumer --topic test --consumer.config config.properties",
+        "kafka-verifiable-consumer --topic test --consumer.config config.properties --broker-list localhost:9092",
+        "test-consumer-settings"
+    ),
+    (
         "kafka-verifiable-consumer --broker-list test:9092",
         "kafka-verifiable-consumer --broker-list test:9092 --consumer.config consumer.properties",
         "test-consumer-settings"
@@ -238,6 +258,11 @@ consumer_test_data = [
     (
         "kafka-console-consumer",
         "kafka-console-consumer --bootstrap-server localhost:9092 --consumer.config consumer.properties",
+        "test-consumer-settings-without-properties"
+    ),
+    (
+        "kafka-console-consumer --consumer.config reader.properties",
+        "kafka-console-consumer --consumer.config reader.properties --bootstrap-server localhost:9092",
         "test-consumer-settings-without-properties"
     ),
     (
@@ -259,6 +284,11 @@ producer_test_data = [
         "test-producer-settings"
     ),
     (
+        "kafka-console-producer --from-beginning --topic test --producer.config writer.properties",
+        "kafka-console-producer --from-beginning --topic test --producer.config writer.properties --broker-list localhost:9092 --property key.separator=, --property print.key=true",
+        "test-producer-settings"
+    ),
+    (
         "kafka-avro-console-producer",
         "kafka-avro-console-producer --broker-list localhost:9092 --property schema.registry.url=http://localhost:8081 --producer.config producer.properties --property key.separator=, --property print.key=true",
         "test-producer-settings"
@@ -266,6 +296,11 @@ producer_test_data = [
     (
         "kafka-avro-console-producer --topic test",
         "kafka-avro-console-producer --topic test --broker-list localhost:9092 --property schema.registry.url=http://localhost:8081 --producer.config producer.properties --property key.separator=, --property print.key=true",
+        "test-producer-settings"
+    ),
+    (
+        "kafka-avro-console-producer --topic test --producer.config tester.properties",
+        "kafka-avro-console-producer --topic test --producer.config tester.properties --broker-list localhost:9092 --property schema.registry.url=http://localhost:8081 --property key.separator=, --property print.key=true",
         "test-producer-settings"
     ),
     (
@@ -284,6 +319,11 @@ producer_test_data = [
         "test-producer-settings"
     ),
     (
+        "kafka-verifiable-producer --topic test --producer.config tester.properties",
+        "kafka-verifiable-producer --topic test --producer.config tester.properties --broker-list localhost:9092",
+        "test-producer-settings"
+    ),
+    (
         "kafka-verifiable-producer --broker-list test:9092",
         "kafka-verifiable-producer --broker-list test:9092 --producer.config producer.properties",
         "test-producer-settings"
@@ -294,10 +334,168 @@ producer_test_data = [
         "test-producer-settings-without-properties"
     ),
     (
+        "kafka-console-producer --producer.config prod.properties",
+        "kafka-console-producer --producer.config prod.properties --broker-list localhost:9092",
+        "test-producer-settings-without-properties"
+    ),
+    (
         "kafka-avro-console-producer",
         "kafka-avro-console-producer --broker-list localhost:9092 --property schema.registry.url=http://localhost:8081 --producer.config producer.properties",
         "test-producer-settings-without-properties"
     )
+]
+
+admin_client_test_data = [
+    (
+        "kafka-acls",
+        "kafka-acls --bootstrap-server localhost:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-acls --bootstrap-server my-cluster.cluster.com:9092",
+        "kafka-acls --bootstrap-server my-cluster.cluster.com:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-acls --bootstrap-server my-cluster.cluster.com:9092 --deny-host 127.0.0.1",
+        "kafka-acls --bootstrap-server my-cluster.cluster.com:9092 --deny-host 127.0.0.1 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-acls --cluster --command-config admin.properties --bootstrap-server test:9092",
+        "kafka-acls --cluster --command-config admin.properties --bootstrap-server test:9092",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-acls --cluster --bootstrap-server test:9092 --command-config other.properties",
+        "kafka-acls --cluster --bootstrap-server test:9092 --command-config other.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-configs",
+        "kafka-configs --zookeeper localhost:2181 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-configs --zookeeper test:2181",
+        "kafka-configs --zookeeper test:2181 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-configs --zookeeper test:2181 --command-config test.properties",
+        "kafka-configs --zookeeper test:2181 --command-config test.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-configs --command-config test.properties",
+        "kafka-configs --command-config test.properties --zookeeper localhost:2181",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-consumer-groups",
+        "kafka-consumer-groups --bootstrap-server localhost:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-consumer-groups --list",
+        "kafka-consumer-groups --list --bootstrap-server localhost:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-consumer-groups --to-offset 10 --list",
+        "kafka-consumer-groups --to-offset 10 --list --bootstrap-server localhost:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-consumer-groups --list --bootstrap-server test:9092",
+        "kafka-consumer-groups --list --bootstrap-server test:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-consumer-groups --list --command-config test.properties",
+        "kafka-consumer-groups --list --command-config test.properties --bootstrap-server localhost:9092",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-consumer-groups --list --bootstrap-server test:9092 --command-config test.properties",
+        "kafka-consumer-groups --list --bootstrap-server test:9092 --command-config test.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-broker-api-versions",
+        "kafka-broker-api-versions --bootstrap-server localhost:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-broker-api-versions --bootstrap-server broker1:9092",
+        "kafka-broker-api-versions --bootstrap-server broker1:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-broker-api-versions --bootstrap-server broker2:9092 --command-config test.properties",
+        "kafka-broker-api-versions --bootstrap-server broker2:9092 --command-config test.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-broker-api-versions --command-config test.properties",
+        "kafka-broker-api-versions --command-config test.properties --bootstrap-server localhost:9092",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-delete-records",
+        "kafka-delete-records --bootstrap-server localhost:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-delete-records --bootstrap-server broker1:9092",
+        "kafka-delete-records --bootstrap-server broker1:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-delete-records --offset-json-file offsets.json",
+        "kafka-delete-records --offset-json-file offsets.json --bootstrap-server localhost:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-delete-records --offset-json-file offsets.json --bootstrap-server broker1:9092",
+        "kafka-delete-records --offset-json-file offsets.json --bootstrap-server broker1:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-delete-records --offset-json-file offsets.json --command-config test.properties --bootstrap-server broker1:9092",
+        "kafka-delete-records --offset-json-file offsets.json --command-config test.properties --bootstrap-server broker1:9092",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-delete-records --offset-json-file offsets.json --command-config test.properties",
+        "kafka-delete-records --offset-json-file offsets.json --command-config test.properties --bootstrap-server localhost:9092",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-log-dirs",
+        "kafka-log-dirs --bootstrap-server localhost:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-log-dirs --bootstrap-server test:9092",
+        "kafka-log-dirs --bootstrap-server test:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-log-dirs --broker-list 0,1",
+        "kafka-log-dirs --broker-list 0,1 --bootstrap-server localhost:9092 --command-config admin.properties",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-log-dirs --broker-list 0,1 --command-config test.properties",
+        "kafka-log-dirs --broker-list 0,1 --command-config test.properties --bootstrap-server localhost:9092",
+        "test-admin-client-settings"
+    ),
+    (
+        "kafka-log-dirs --broker-list 0,1 --command-config test.properties --bootstrap-server test:9092",
+        "kafka-log-dirs --broker-list 0,1 --command-config test.properties --bootstrap-server test:9092",
+        "test-admin-client-settings"
+    ),
 ]
 
 prefix_test_data = [
@@ -383,6 +581,18 @@ def test_executor_consumer_settings(mock_config_path, mock_os_system, test_input
 @mock.patch('kafkashell.config.get_user_config_path')
 @pytest.mark.parametrize("test_input,expected,config_file", producer_test_data)
 def test_executor_producer_settings(mock_config_path, mock_os_system, test_input, expected, config_file):
+    mock_config_path.return_value = setup_config_path_for_test(config_file)
+
+    executor = kafkashell.executor.Executor(kafkashell.settings.Settings())
+    executor.execute(test_input)
+
+    mock_os_system.assert_called_once_with(expected)
+
+
+@mock.patch('os.system')
+@mock.patch('kafkashell.config.get_user_config_path')
+@pytest.mark.parametrize("test_input,expected,config_file", admin_client_test_data)
+def test_executor_admin_client_settings(mock_config_path, mock_os_system, test_input, expected, config_file):
     mock_config_path.return_value = setup_config_path_for_test(config_file)
 
     executor = kafkashell.executor.Executor(kafkashell.settings.Settings())

@@ -20,7 +20,7 @@ setuptools.setup(
     name="kafka-shell",
     version=meta["__version__"],
     author="Shawn Seymour",
-    author_email="shawn@flunk.io",
+    author_email="shawn@devshawn.com",
     description="A supercharged, interactive Kafka shell built on top of the existing Kafka CLI tools.",
     long_description=long_description,
     long_description_content_type="text/markdown",
