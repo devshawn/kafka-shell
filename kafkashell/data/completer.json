@@ -792,6 +792,32 @@
                 }
             }
         },
+        "kafka-preferred-replica-election": {
+            "name": "kafka-preferred-replica-election",
+            "description": "Tool to cause leadership for each partition to be transferred back to the 'preferred replica'.",
+            "options": {
+                "--admin.config": {
+                    "name": "--admin.config",
+                    "description": "Property file containing configs to be passed to the admin client."
+                },
+                "--bootstrap-server": {
+                    "name": "--bootstrap-server",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--help": {
+                    "name": "--help",
+                    "description": "Print usage information."
+                },
+                "--path-to-json-file": {
+                    "name": "--path-to-json-file",
+                    "description": "The JSON file with the list of partitions to perform preferred replica leader election on."
+                },
+                "--zookeeper": {
+                    "name": "--zookeeper",
+                    "description": "DEPRECATED. Zookeeper connection string."
+                }
+            }
+        },
         "kafka-replica-verification": {
             "name": "kafka-replica-verification",
             "description": "Validate that all replicas for a set of topics have the same data.",
