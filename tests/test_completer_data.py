@@ -5,14 +5,14 @@ command_test_data = [
         "",
         ["version", "cluster-select", "cluster-describe", "exit", "clear", "kafka-acls", "kafka-avro-console-consumer",
          "kafka-avro-console-producer", "kafka-replica-verification", "kafka-preferred-replica-election",
-         "kafka-broker-api-versions", "kafka-configs", "kafka-console-consumer", "kafka-console-producer",
+         "kafka-broker-api-versions", "kafka-configs", "kafka-console-consumer", "kafka-console-producer", "kafka-reassign-partitions",
          "kafka-consumer-groups", "kafka-delete-records", "kafka-dump-log", "kafka-log-dirs", "kafka-topics",
          "kafka-verifiable-consumer", "kafka-verifiable-producer", "ksql", "zookeeper-shell"]
     ),
     (
         "kafka",
         ["kafka-acls", "kafka-avro-console-consumer", "kafka-avro-console-producer", "kafka-broker-api-versions",
-         "kafka-configs", "kafka-console-consumer", "kafka-console-producer", "kafka-consumer-groups",
+         "kafka-configs", "kafka-console-consumer", "kafka-console-producer", "kafka-consumer-groups", "kafka-reassign-partitions",
          "kafka-delete-records", "kafka-dump-log", "kafka-log-dirs", "kafka-topics", "kafka-verifiable-consumer",
          "kafka-verifiable-producer", "kafka-replica-verification", "kafka-preferred-replica-election"]
     ),
@@ -20,7 +20,7 @@ command_test_data = [
         "k",
         ["ksql", "kafka-acls", "kafka-avro-console-consumer", "kafka-avro-console-producer",
          "kafka-broker-api-versions", "kafka-replica-verification", "kafka-preferred-replica-election",
-         "kafka-configs", "kafka-console-consumer", "kafka-console-producer", "kafka-consumer-groups",
+         "kafka-configs", "kafka-console-consumer", "kafka-console-producer", "kafka-consumer-groups", "kafka-reassign-partitions",
          "kafka-delete-records", "kafka-dump-log", "kafka-log-dirs", "kafka-topics", "kafka-verifiable-consumer",
          "kafka-verifiable-producer", "zookeeper-shell"]
     ),

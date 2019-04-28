@@ -848,6 +848,68 @@
                 }
             }
         },
+        "kafka-reassign-partitions": {
+            "name": "kafka-reassign-partitions",
+            "description": "Reassign and move topic partitions between replicas.",
+            "options": {
+                "--bootstrap-server": {
+                    "name": "--bootstrap-server",
+                    "description": "The Kafka broker(s) to connect to. NOTE: This'll overwrite the selected cluster value."
+                },
+                "--broker-list": {
+                    "name": "--broker-list",
+                    "description": "The list of brokers used in reassignment in the form '0,1,2'. Default: all."
+                },
+                "--command-config": {
+                    "name": "--command-config",
+                    "description": "Property file containing configs to be passed to the admin client."
+                },
+                "--disable-rack-aware": {
+                    "name": "--disable-rack-aware",
+                    "description": "Disable rack aware replica assignment."
+                },
+                "--execute": {
+                    "name": "--execute",
+                    "description": "Start the reassignment as specified by the '--reassignment-json-file' option."
+                },
+                "--generate": {
+                    "name": "--generate",
+                    "description": "Generate a candidate partition reassignment configuration. This does not execute it."
+                },
+                "--help": {
+                    "name": "--help",
+                    "description": "Print usage information."
+                },
+                "--reassignment-json-file": {
+                    "name": "--reassignment-json-file",
+                    "description": "The JSON file with the partition reassignment configuration."
+                },
+                "--replica-alter-logs-dirs-throttle": {
+                    "name": "--replica-alter-logs-dirs-throttle",
+                    "description": "The movement of replicas between log directories will be throttled by this value. Default: -1."
+                },
+                "--throttle": {
+                    "name": "--throttle",
+                    "description": "The movement of partitions between brokers will be throttled by this value. Default: -1."
+                },
+                "--timeout": {
+                    "name": "--timeout",
+                    "description": "The maximum time in ms allowed to wait for execution to start. Default: 10000."
+                },
+                "--topics-to-move-json-file": {
+                    "name": "--topics-to-move-json-file",
+                    "description": "Generate a configuration to move partitions of the specified topics to the given list of brokers."
+                },
+                "--verify": {
+                    "name": "--verify",
+                    "description": "Verify if the reassignment has completed."
+                },
+                "--zookeeper": {
+                    "name": "--zookeeper",
+                    "description": "Zookeeper connection string. WARNING: This'll overwrite the selected cluster value."
+                }
+            }
+        },
         "kafka-broker-api-versions": {
             "name": "kafka-broker-api-versions",
             "description": "Retrieve broker version information.",
