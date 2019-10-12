@@ -66,6 +66,11 @@ def test_default_config_schema():
     validate_schema(json_value, "shell-config", "Default user config")
 
 
+def test_environment_variable_config_schema():
+    json_value = get_test_config("test-environment-variables")
+    validate_schema(json_value, "shell-config", "Environment variable user config")
+
+
 def test_invalid_configs():
     json_value = get_test_config("test-invalid-ksql")
     message = validate_invalid_schema(json_value, "shell-config")

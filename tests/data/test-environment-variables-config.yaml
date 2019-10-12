@@ -1,0 +1,22 @@
+version: 1
+enable:
+  history: true
+  save_on_exit: true
+  auto_complete: true
+  auto_suggest: true
+  inline_help: true
+  fuzzy_search: true
+cluster: local
+clusters:
+  local:
+    bootstrap_servers: $BOOTSTRAP_SERVERS
+    zookeeper_connect: $ZOOKEEPER_CONNECT
+    schema_registry_url: $SCHEMA_REGISTRY_URL
+    ksql_server_url: $KSQL_SERVER_URL
+    command_prefix: ''
+  test:
+    bootstrap_servers: test:9092
+    zookeeper_connect: test:2181
+    schema_registry_url: https://test:8081
+    ksql_server_url: https://test:8088
+    command_prefix: ''

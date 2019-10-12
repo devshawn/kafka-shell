@@ -1,8 +1,8 @@
-import json
 import os
 import sys
 
 import mock
+import oyaml as yaml
 import pytest
 
 from tests.context import kafkashell
@@ -137,14 +137,27 @@ def test_get_config(mock_expanduser, test_input, expected):
 @mock.patch(print_patch_name)
 @mock.patch("sys.exit")
 @pytest.mark.parametrize("test_input,expected", test_config_data)
-def test_validate_config_invalid(mock_exit, mock_print, test_input, expected):
+def test_validate_config_valid(mock_exit, mock_print, test_input, expected):
     with open("tests/data/test-config.yaml") as f:
-        config = json.load(f)
+        config = yaml.safe_load(f)
         returned_config = kafkashell.config.validate_config(config)
 
-        assert config == returned_config
         assert not mock_print.called
         assert not mock_exit.called
+        assert config == returned_config
+
+
+@mock.patch(print_patch_name)
+@mock.patch("sys.exit")
+@pytest.mark.parametrize("test_input,expected", test_config_data)
+def test_validate_config_is_valid_with_environment_variables(mock_exit, mock_print, test_input, expected):
+    with open("tests/data/test-environment-variables-config.yaml") as f:
+        config = yaml.safe_load(f)
+        returned_config = kafkashell.config.validate_config(config)
+
+        assert not mock_print.called
+        assert not mock_exit.called
+        assert config == returned_config
 
 
 @mock.patch(print_patch_name)
