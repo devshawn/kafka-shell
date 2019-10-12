@@ -141,7 +141,7 @@
                             "examples": [
                                 "http://localhost:8081"
                             ],
-                            "pattern": "^https?://(.*)$"
+                            "pattern": "^https?://(.*)$|^\\$.*$"
                         },
                         "ksql_server_url": {
                             "type": "string",
@@ -151,7 +151,7 @@
                             "examples": [
                                 "http://localhost:8088"
                             ],
-                            "pattern": "^https?://(.*)$"
+                            "pattern": "^https?://(.*)$|^\\$.*$"
                         },
                         "command_prefix": {
                             "type": "string",
