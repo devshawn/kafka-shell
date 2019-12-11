@@ -1,0 +1,17 @@
+version: 1
+enable:
+  history: true
+  save_on_exit: true
+  auto_complete: true
+  auto_suggest: true
+  inline_help: true
+  fuzzy_search: true
+cluster: local
+clusters:
+  local:
+    bootstrap_servers: localhost:9092
+    zookeeper_connect: localhost:2181
+    schema_registry_url: http://localhost:8081
+    ksql_server_url: http://localhost:8088
+    command_prefix: ''
+    command_file_extension: sh

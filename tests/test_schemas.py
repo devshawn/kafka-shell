@@ -79,3 +79,9 @@ def test_invalid_configs():
     json_value = get_test_config("test-invalid-schema-registry")
     message = validate_invalid_schema(json_value, "shell-config")
     assert message is not None
+
+
+def test_invalid_file_extension():
+    json_value = get_test_config("test-invalid-file-extension")
+    message = validate_invalid_schema(json_value, "shell-config")
+    assert message is not None
