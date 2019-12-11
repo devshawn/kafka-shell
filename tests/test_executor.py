@@ -591,6 +591,24 @@ prefix_none_test_data = [
     ("   ksql   ", "ksql -- http://localhost:8088"),
 ]
 
+command_file_extension_sh_test_data = [
+    ("kafka-topics --list", "kafka-topics.sh --list --zookeeper localhost:2181"),
+    ("kafka-console-consumer", "kafka-console-consumer.sh --bootstrap-server localhost:9092"),
+    (
+        "kafka-consumer-groups --to-offset 10 --list",
+        "kafka-consumer-groups.sh --to-offset 10 --list --bootstrap-server localhost:9092"
+    )
+]
+
+command_file_extension_bat_test_data = [
+    ("kafka-topics --list", "kafka-topics.bat --list --zookeeper localhost:2181"),
+    ("kafka-console-consumer", "kafka-console-consumer.bat --bootstrap-server localhost:9092"),
+    (
+        "kafka-consumer-groups --to-offset 10 --list",
+        "kafka-consumer-groups.bat --to-offset 10 --list --bootstrap-server localhost:9092"
+    )
+]
+
 command_prefix_test_data = [
     ({}, False),
     ({"command_prefix": ""}, False),
@@ -697,6 +715,30 @@ def test_executor_command_prefix(mock_config_path, mock_os_system, test_input, e
 @pytest.mark.parametrize("test_input,expected", prefix_none_test_data)
 def test_executor_command_prefix_none(mock_config_path, mock_os_system, test_input, expected):
     mock_config_path.return_value = setup_config_path_for_test("test-prefix-none")
+
+    executor = kafkashell.executor.Executor(kafkashell.settings.Settings())
+    executor.execute(test_input)
+
+    mock_os_system.assert_called_once_with(expected)
+
+
+@mock.patch('os.system')
+@mock.patch('kafkashell.config.get_user_config_path')
+@pytest.mark.parametrize("test_input,expected", command_file_extension_sh_test_data)
+def test_executor_command_file_extension_sh(mock_config_path, mock_os_system, test_input, expected):
+    mock_config_path.return_value = setup_config_path_for_test("test-file-extension-sh")
+
+    executor = kafkashell.executor.Executor(kafkashell.settings.Settings())
+    executor.execute(test_input)
+
+    mock_os_system.assert_called_once_with(expected)
+
+
+@mock.patch('os.system')
+@mock.patch('kafkashell.config.get_user_config_path')
+@pytest.mark.parametrize("test_input,expected", command_file_extension_bat_test_data)
+def test_executor_command_file_extension_bat(mock_config_path, mock_os_system, test_input, expected):
+    mock_config_path.return_value = setup_config_path_for_test("test-file-extension-bat")
 
     executor = kafkashell.executor.Executor(kafkashell.settings.Settings())
     executor.execute(test_input)

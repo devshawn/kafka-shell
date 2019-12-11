@@ -163,6 +163,17 @@
                             ],
                             "pattern": "^(.*)$"
                         },
+                        "command_file_extension": {
+                            "type": "string",
+                            "title": "Command File Extension",
+                            "description": "Add a file extension such as '.sh' or .bat' to the commands.",
+                            "default": "",
+                            "examples": [
+                                "sh",
+                                "bat"
+                            ],
+                            "pattern": "^sh$|^bat$"
+                        },
                         "consumer_settings": {
                             "type": "object",
                             "title": "Consumer Settings",

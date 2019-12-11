@@ -16,9 +16,9 @@
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import os
 import sys
 
+import os
 from prompt_toolkit import shortcuts
 
 from kafkashell import constants
@@ -117,11 +117,21 @@ class Executor:
         else:
             final_command = command
 
+        final_command = self.handle_file_extension(final_command)
+
         if self.check_for_valid_command_prefix():
             command_prefix = self.settings.get_cluster_details()["command_prefix"].strip()
             final_command = "{0} {1}".format(command_prefix, final_command)
 
         os.system(final_command)
+
+    def handle_file_extension(self, command):
+        file_extension = self.get_file_extension()
+        if file_extension is not None:
+            split_command = command.split(" ")
+            split_command[0] = "{}.{}".format(split_command[0], file_extension)
+            return " ".join(split_command)
+        return command
 
     def execute_cluster_command(self, command):
         split_text = command.split(" ")
@@ -327,6 +337,12 @@ class Executor:
         return "command_prefix" in self.settings.get_cluster_details() \
                and \
                len(self.settings.get_cluster_details()["command_prefix"]) > 0
+
+    def get_file_extension(self):
+        try:
+            return self.settings.get_cluster_details()["command_file_extension"]
+        except KeyError:
+            return None
 
     @staticmethod
     def wrap_with_spaces(string):

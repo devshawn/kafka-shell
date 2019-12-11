@@ -58,16 +58,17 @@ Clusters can be defined to run commands against. Commands automatically add flag
 
 Each cluster should have a unique name (a key in the `clusters` root-level object). By default, the cluster `local` is added.
 
-| key                     | type         | description                                                   |
-|-------------------------|--------------|---------------------------------------------------------------|
-| `bootstrap_servers`     | string       | Comma-separated `host:port` Kafka brokers to connect to.      |
-| `zookeeper_connect`     | string       | Comma-separated `host:port` Zookeeper nodes to connect to.    |
-| `schema_registry_url`   | string       | Schema Registry URL used when working with avro schemas.      |
-| `ksql_server_url`       | string       | KSQL Server URL used when utilizing the `ksql` command.       |
-| `command_prefix`        | string       | Prefix all commands with another command, i.e. 'docker exec'. |
-| `consumer_settings`     | ToolSettings | Pass config and default property settings to consumer CLIs.   |
-| `producer_settings`     | ToolSettings | Pass config and default property settings to producer CLIs.   |
-| `admin_client_settings` | ToolSettings | Pass config to admin clients through `--command-config`.   |
+| key                      | type         | description                                                   |
+|--------------------------|--------------|---------------------------------------------------------------|
+| `bootstrap_servers`      | string       | Comma-separated `host:port` Kafka brokers to connect to.      |
+| `zookeeper_connect`      | string       | Comma-separated `host:port` Zookeeper nodes to connect to.    |
+| `schema_registry_url`    | string       | Schema Registry URL used when working with avro schemas.      |
+| `ksql_server_url`        | string       | KSQL Server URL used when utilizing the `ksql` command.       |
+| `command_prefix`         | string       | Prefix all commands with another command, i.e. 'docker exec'. |
+| `command_file_extension` | string       | Add a file extension such as `sh` to commands.                |
+| `consumer_settings`      | ToolSettings | Pass config and default property settings to consumer CLIs.   |
+| `producer_settings`      | ToolSettings | Pass config and default property settings to producer CLIs.   |
+| `admin_client_settings`  | ToolSettings | Pass config to admin clients through `--command-config`.      |
 
 
 #### Tool Settings
@@ -142,6 +143,34 @@ docker exec -it kafka-tools kafka-broker-api-versions --bootstrap-server docker:
 
 As you can see, you can save a ton of typing time by utilizing `kafka-shell`!
 
+### Command File Extension
+
+The file extension for commands such as `kafka-topics` is `null` by default. Depending on how you installed the kafka command-line tools, they may have the extension `sh` or `bat`. They may also be set this way in pre-built docker images.
+
+You can change this, per cluster, by setting the `command_file_extension` property in the cluster config. For example:
+
+```yaml
+...
+clusters:
+  local:
+    bootstrap_servers: localhost:9092
+    zookeeper_connect: localhost:2181
+    schema_registry_url: http://localhost:8081
+    ksql_server_url: http://localhost:8088
+    command_file_extension: sh
+```
+
+If you run `kafka-topics --list` with the above command, the following would be run:
+
+```bash
+kafka-topics.sh --list --zookeeper localhost:2181
+```
+
+Without the file extension config set, the following would be run:
+
+```bash
+kafka-topics --list --zookeeper localhost:2181
+```
 
 ## Support
 If you have a question on how to configure `kafka-shell`, feel free to [open a support issue][support].
