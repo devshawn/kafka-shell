@@ -574,6 +574,11 @@ admin_client_test_data = [
         "kafka-reassign-partitions --zookeeper test:2181",
         "kafka-reassign-partitions --zookeeper test:2181 --bootstrap-server localhost:9092 --command-config admin.properties",
         "test-admin-client-settings"
+    ),
+    (
+        "kafka-topics --list",
+        "kafka-topics --list --zookeeper localhost:2181 --command-config admin.properties",
+        "test-admin-client-settings"
     )
 ]
 
@@ -607,6 +612,11 @@ command_file_extension_bat_test_data = [
         "kafka-consumer-groups --to-offset 10 --list",
         "kafka-consumer-groups.bat --to-offset 10 --list --bootstrap-server localhost:9092"
     )
+]
+
+no_zookeeper_test_data = [
+    ("kafka-topics --list", "kafka-topics --list --bootstrap-server localhost:9092"),
+    ("kafka-topics --list --bootstrap-server docker:9092", "kafka-topics --list --bootstrap-server docker:9092"),
 ]
 
 command_prefix_test_data = [
@@ -655,6 +665,18 @@ version_test_data = [
 @pytest.mark.parametrize("test_input,expected", test_data)
 def test_executor(mock_config_path, mock_os_system, test_input, expected):
     mock_config_path.return_value = setup_config_path_for_test()
+
+    executor = kafkashell.executor.Executor(kafkashell.settings.Settings())
+    executor.execute(test_input)
+
+    mock_os_system.assert_called_once_with(expected)
+
+
+@mock.patch('os.system')
+@mock.patch('kafkashell.config.get_user_config_path')
+@pytest.mark.parametrize("test_input,expected", no_zookeeper_test_data)
+def test_executor_no_zookeeper(mock_config_path, mock_os_system, test_input, expected):
+    mock_config_path.return_value = setup_config_path_for_test("test-no-zookeeper")
 
     executor = kafkashell.executor.Executor(kafkashell.settings.Settings())
     executor.execute(test_input)

@@ -164,7 +164,8 @@ class Executor:
             print("Unknown cluster!")
 
     def handle_kafka_topics_command(self, command):
-        command += self.handle_zookeeper_flag(command)
+        command += self.handle_bootstrap_or_zookeeper_flag(command)
+        command += self.handle_admin_client_settings(command)
         return command
 
     def handle_kafka_configs_command(self, command):
@@ -253,6 +254,12 @@ class Executor:
         return command
 
     # Helpers
+
+    def handle_bootstrap_or_zookeeper_flag(self, command):
+        if self.settings.get_cluster_details().get("zookeeper_connect") is not None:
+            return self.handle_zookeeper_flag(command)
+
+        return self.handle_bootstrap_server_flag(command)
 
     def handle_zookeeper_flag(self, command):
         if constants.FLAG_ZOOKEEPER not in command:
